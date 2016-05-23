@@ -130,7 +130,7 @@ class Settings
     {
         $out = array();
         $out['pluginVer'] = WPOP_PLUGIN_VER; //always save plugin version to db
-        $out['baseURL'] = sanitize_text_field($in['baseURL']);
+        $out['baseURL'] = rtrim(sanitize_text_field($in['baseURL']),'/');
 
         return $out;
 

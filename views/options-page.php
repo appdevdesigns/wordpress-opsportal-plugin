@@ -8,7 +8,7 @@
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row">Base URL</th>
+                <th scope="row"><?php _e('Base URL', WPOP_TEXT_DOMAIN); ?></th>
                 <td>
                     <input type="text" size="25" name="ops_portal_options[baseURL]"
                            value="<?php echo esc_attr($db['baseURL']); ?>">

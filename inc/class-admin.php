@@ -42,7 +42,7 @@ class Admin
             self::PLUGIN_SLUG,
             array($this->settings, 'load_options_page'));
 
-        //add_action('admin_print_scripts-' . $page_hook_suffix, array($this, 'add_admin_assets'));
+        add_action('admin_print_scripts-' . $page_hook_suffix, array($this, 'add_admin_assets'));
     }
 
 
@@ -76,7 +76,8 @@ class Admin
      */
     function add_admin_assets()
     {
-        //use wp_enqueue_style or  wp_enqueue_script
+        wp_enqueue_style('ops-admin', plugins_url('/assets/css/option-page.css', WPOP_BASE_FILE), array(), WPOP_PLUGIN_VER);
+        wp_enqueue_script('ops-admin', plugins_url("/assets/js/option-page.js", WPOP_BASE_FILE), array('jquery'), WPOP_PLUGIN_VER, false);
     }
 
 }

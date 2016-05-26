@@ -30,6 +30,10 @@ sudo chown -R www-data:www-date logs
 - Go through menus Plugin->Add New->Upload Plugin
 - Upload the .zip file there.
 - Activate the plugin when asked
+- Go through Settings->Ops portal
+- Set BaseURL of Ops Portal (pre-installed)
+- Save settings
+- Add ```[ops_portal]``` short-code on a page to see ops portal in action
 
 
 #### License

@@ -1,5 +1,5 @@
 === WP Ops Portal===
-Tags: tabs, demo
+Tags: ops portal, appdevdesigns
 Requires at least: 4.0.0
 Tested up to: 4.5.2
 Stable tag: 1.0.0

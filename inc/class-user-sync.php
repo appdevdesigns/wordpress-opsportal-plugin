@@ -24,6 +24,7 @@ class User_Sync
     /**
      * Hook runs after new user is inserted into WP database
      * @param $user_id
+     * @return array
      */
     function create_ops_portal_user($user_id)
     {
@@ -31,15 +32,24 @@ class User_Sync
         $user_info = get_userdata($user_id);
 
         $request = array(
-            'username' => $user_info->user_login,
-            'guid' => uniqid()
+            'username' => $user_info->user_login
         );
 
         $response = $this->api->createUser($request);
-        //add a meta field to user record if it has been synced or not
+        $this->add_user_meta($user_id, $response);
+        return $response;
+
+    }
+
+    /**
+     * Add a flag along with user records if user has been synced or not
+     * @param $user_id
+     * @param $response array Server response
+     */
+    private function add_user_meta($user_id, $response)
+    {
         $op_synced = ((false !== empty($response)) && $response['http_code'] == 201);
         update_user_meta($user_id, 'op_synced', $op_synced);
-
     }
 
 

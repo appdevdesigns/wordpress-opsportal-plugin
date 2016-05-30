@@ -14,7 +14,7 @@ class Shortcode
     }
 
     /**
-     * Process shortcode and generate html
+     * Process short-code and outputs html
      * @return mixed
      */
     public function process_shortcode()
@@ -23,13 +23,16 @@ class Shortcode
         $db = get_option(WPOP_OPTION_NAME);
 
         if (!empty($db['baseURL'])) {
-            ?>
-            <div id="portal" class="wp-ops-portal-"><!--dynamic content--></div>
+            ?> <!-- ==== Ops Portal Start ==== -->
+            <div id="portal" class="wp-ops-portal"></div>
             <script
+                async="async"
+                defer="defer"
                 type="text/javascript"
-                src="<?php echo esc_url($db['baseURL']) ?>/steal/steal.js?OpsPortal"
-                config="<?php echo esc_url($db['baseURL']) ?>/stealconfig.js">
+                src="<?php echo esc_url($db['baseURL']) ?>/steal/steal.js?OpsPortal&ver=<?php echo urlencode(WPOP_PLUGIN_VER) ?>"
+                data-config="<?php echo esc_url($db['baseURL']) ?>/stealconfig.js">
             </script>
+            <!-- ==== Ops Portal Ends ==== -->
             <?php
         } else {
             ?>

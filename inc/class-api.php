@@ -73,7 +73,7 @@ class API
 
 
     private function setBaseUrl()
-    {
+    { 
         $db = get_option(WPOP_OPTION_NAME);
         if (false !== $db) {
             //notice: append a slash at end

@@ -33,9 +33,13 @@ class User_Sync
     {
         //https://codex.wordpress.org/Function_Reference/get_userdata
         $user_info = get_userdata($user_id);
-
+        //todo how to DRY it
         $request = array(
-            'username' => $user_info->user_login
+            'username' => $user_info->user_login,
+            //'password'=>'', //Should we also send password, no ?
+            'email' => $user_info->user_email,
+            //'guid' => uniqid('', true), //Don't send, server will auto generate it
+            'isActive' => 1 //Activate as soon as they register ?
         );
 
         $response = $this->api->createUser($request);
@@ -54,7 +58,9 @@ class User_Sync
         foreach ($users as $user) {
 
             $request = array(
-                'username' => $user->user_login
+                'username' => $user->user_login,
+                'email' => $user->user_email,
+                'isActive' => 1 //Activate as soon as they register ?
             );
 
             $response = $this->api->createUser($request);
@@ -63,7 +69,6 @@ class User_Sync
         }
 
     }
-
 
     /**
      * Add a flag along with user records if user has been synced or not
@@ -75,6 +80,7 @@ class User_Sync
         $op_synced = 0;
         if (isset($response['http_code']) && $response['http_code'] == 201) {
             $op_synced = 1;
+            update_user_meta($user_id, 'op_user_id', $response['data']['id']);
         }
         update_user_meta($user_id, self::sync_flag, $op_synced);
     }

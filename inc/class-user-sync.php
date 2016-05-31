@@ -32,17 +32,8 @@ class User_Sync
     public function create_ops_portal_user($user_id)
     {
         //https://codex.wordpress.org/Function_Reference/get_userdata
-        $user_info = get_userdata($user_id);
-        //todo how to DRY it
-        $request = array(
-            'username' => $user_info->user_login,
-            //'password'=>'', //Should we also send password, no ?
-            'email' => $user_info->user_email,
-            //'guid' => uniqid('', true), //Don't send, server will auto generate it
-            'isActive' => 1 //Activate as soon as they register ?
-        );
-
-        $response = $this->api->createUser($request);
+        $user = get_userdata($user_id);
+        $response = $this->api->createUser($this->build_create_user_request($user));
         $this->add_user_meta($user_id, $response);
         return $response;
 
@@ -56,18 +47,26 @@ class User_Sync
         $users = $this->get_not_synced_users();
 
         foreach ($users as $user) {
-
-            $request = array(
-                'username' => $user->user_login,
-                'email' => $user->user_email,
-                'isActive' => 1 //Activate as soon as they register ?
-            );
-
-            $response = $this->api->createUser($request);
+            $response = $this->api->createUser($this->build_create_user_request($user));
             $this->add_user_meta($user->ID, $response);
 
         }
 
+    }
+
+    /** Create the request body for create user request
+     * @param $user
+     * @return array
+     */
+    private function build_create_user_request($user)
+    {
+        return array(
+            'username' => $user->user_login,
+            //'password'=>'', //Should we also send password, no ?
+            'email' => $user->user_email,
+            //'guid' => uniqid('', true), //Don't send, server will auto generate it
+            'isActive' => 1 //Activate as soon as they register ?
+        );
     }
 
     /**

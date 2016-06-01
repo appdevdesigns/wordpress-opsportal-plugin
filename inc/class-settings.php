@@ -27,9 +27,11 @@ class Settings
      */
     public function get_default_options()
     {
+        //Note:: CamelCase keys
         return array(
             'pluginVer' => WPOP_PLUGIN_VER,//always store plugin version in db, it will help in upgrades
-            'baseURL' => ''
+            'baseURL' => '',
+            'debugCURL' => 0
         );
     }
 
@@ -130,9 +132,32 @@ class Settings
     {
         $out = array();
         $out['pluginVer'] = WPOP_PLUGIN_VER; //always save plugin version to db
-        $out['baseURL'] = rtrim(sanitize_text_field($in['baseURL']),'/');
-
+        $out['baseURL'] = rtrim(sanitize_text_field($in['baseURL']), '/');
+        $out['debugCURL'] = isset($in['debugCURL']);
         return $out;
+
+    }
+
+    /**
+     * Read file content from logs directory
+     * @param $file string file name
+     * @return string
+     */
+    private function read_log_file($file)
+    {
+        $log_dir = dirname(dirname(__FILE__)) . '/logs/';
+        $file_path = $log_dir . sanitize_file_name($file);
+
+        if (is_readable($file_path)) {
+            $contents = file_get_contents($file_path);
+            if (trim($contents) === '') {
+                return 'File is empty';
+            } else {
+                return $contents;
+            }
+        }
+
+        return $file . ' not readable or not found';
 
     }
 

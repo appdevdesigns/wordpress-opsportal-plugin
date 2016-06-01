@@ -178,7 +178,8 @@ class Http
      */
     private function shouldDebug()
     {
-        return (defined('WP_DEBUG') && WP_DEBUG == true);
+        $db = get_option(WPOP_OPTION_NAME);
+        return (isset($db['debugCURL']) && $db['debugCURL'] == 1);
 
     }
 

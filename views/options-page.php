@@ -30,7 +30,34 @@
                 <p>Interface options goes here</p>
             </section>
             <section id="op-troubleshoot" class="tab-content">
-                <p>Troubleshooting options goes here</p>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><?php _e('Debug CURL', WPOP_TEXT_DOMAIN) ?> :</th>
+                        <td><label><input type="checkbox" name="ops_portal_options[debugCURL]"
+                                          value="1" <?php checked($db['debugCURL'], 1) ?>><?php _e('Log CURL calls', WPOP_TEXT_DOMAIN) ?>
+                            </label>
+                            <p class="description"><?php _e("This should only be used temporarily or during development", WPOP_TEXT_DOMAIN) ?> </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Last CURL response', WPOP_TEXT_DOMAIN) ?> :</th>
+                        <td>
+                            <pre class="code-dump"><?php echo $this->read_log_file('curl_response.log') ?></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Last CURL stderr log', WPOP_TEXT_DOMAIN) ?> :</th>
+                        <td>
+                            <pre class="code-dump"><?php echo $this->read_log_file('curl_stderr.log') ?></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Database options dump', WPOP_TEXT_DOMAIN) ?> :</th>
+                        <td>
+                            <pre class="code-dump"><?php print_r($db); ?></pre>
+                        </td>
+                    </tr>
+                </table>
             </section>
         </div>
         <?php submit_button() ?>

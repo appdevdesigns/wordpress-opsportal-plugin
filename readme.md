@@ -18,7 +18,7 @@ git checkout dev
 
 ```
 
-* Give write permissions on ```logs``` folder if ```WP_DEBUG``` value is true
+* Give write permissions on ```logs``` folder if you want to debug CURL
 ```
 sudo chmod -R 775 logs
 sudo chown -R www-data:www-date logs

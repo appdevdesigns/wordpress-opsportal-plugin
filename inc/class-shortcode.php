@@ -3,6 +3,8 @@ namespace ITH\plugins\WP_Ops_Portal;
 
 /**
  * Class Shortcode
+ *
+ * Register and process short-code on front-end
  * @package ITH\plugins\WP_Ops_Portal
  */
 class Shortcode

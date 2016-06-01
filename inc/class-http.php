@@ -3,6 +3,8 @@
 namespace ITH\plugins\WP_Ops_Portal;
 /**
  * Class Http
+ *
+ * A portable class that can be used anywhere to perform CURL calls
  * @package ITH\plugins\WP_Ops_Portal
  */
 class Http
@@ -178,6 +180,8 @@ class Http
      */
     private function shouldDebug()
     {
+        //Note:: get_option is WordPress function
+        //If you are planing to use this class somewhere else then do changes according to platform here
         $db = get_option(WPOP_OPTION_NAME);
         return (isset($db['debugCURL']) && $db['debugCURL'] == 1);
 

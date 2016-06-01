@@ -3,6 +3,8 @@ namespace ITH\plugins\WP_Ops_Portal;
 
 /**
  * Class API
+ *
+ * Main class that interacts with Ops Portal APIs with help of Http class
  * @package ITH\plugins\WP_Ops_Portal
  */
 class API
@@ -71,11 +73,14 @@ class API
 
     }
 
-
+    /**
+     * Set base URL for all future CURL calls
+     */
     private function setBaseUrl()
-    { 
+    {
         $db = get_option(WPOP_OPTION_NAME);
-        if (false !== $db) {
+
+        if (false !== $db && isset($db['baseURL'])) {
             //notice: append a slash at end
             $this->baseURL = $db['baseURL'] . '/';
         }

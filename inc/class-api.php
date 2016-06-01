@@ -16,8 +16,11 @@ class API
     //CSRF Token to send with all requests
     private $csrfToken = null;
 
-    //http class instance
+    //Http class instance
     private $http;
+
+    //How long server response should be cached in wp db
+    const cache_time = 3600;
 
     function __construct()
     {
@@ -49,18 +52,29 @@ class API
      * Get a list of roles available
      *
      * @GET
+     * @param $cached bool Check for saved response first
      * @return array
      */
-    public function getRolesList()
+    public function getRolesList($cached = true)
     {
-        $token = $this->getCSRFTokenHeader();
+        if ($cached == true) {
+            $saved = get_transient('ops_portal_rolesList');
+            if ($saved !== false && !empty($saved)) {
+                return $saved;
+            }
+        }
 
-        return $this->http->curl(
+        $token = $this->getCSRFTokenHeader();
+        $response = $this->http->curl(
             $this->baseURL . 'appdev-core/permissionrole',
             array(),
             $token,
             false
         );
+
+        //https://codex.wordpress.org/Transients_API
+        set_transient('ops_portal_rolesList', $response, self::cache_time);
+        return $response;
     }
 
 
@@ -68,18 +82,28 @@ class API
      * Get a list of scopes available
      *
      * @GET
+     * @param $cached bool Check for saved response first
      * @return array
      */
-    public function getScopesList()
+    public function getScopesList($cached = true)
     {
-        $token = $this->getCSRFTokenHeader();
+        if ($cached == true) {
+            $saved = get_transient('ops_portal_scopesList');
+            if ($saved !== false && !empty($saved)) {
+                return $saved;
+            }
+        }
 
-        return $this->http->curl(
+        $token = $this->getCSRFTokenHeader();
+        $response = $this->http->curl(
             $this->baseURL . 'appdev-core/permissionscope',
             array(),
             $token,
             false
         );
+
+        set_transient('ops_portal_scopesList', $response, self::cache_time);
+        return $response;
     }
 
     /**

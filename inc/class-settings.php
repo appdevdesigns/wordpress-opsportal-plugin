@@ -31,7 +31,9 @@ class Settings
         return array(
             'pluginVer' => WPOP_PLUGIN_VER,//always store plugin version in db, it will help in upgrades
             'baseURL' => '',
-            'debugCURL' => 0
+            'debugCURL' => 0,
+            'defaultRole' => '',
+            'defaultScopes' => array(),
         );
     }
 
@@ -134,6 +136,8 @@ class Settings
         $out['pluginVer'] = WPOP_PLUGIN_VER; //always save plugin version to db
         $out['baseURL'] = rtrim(sanitize_text_field($in['baseURL']), '/');
         $out['debugCURL'] = isset($in['debugCURL']);
+        $out['defaultRole'] = intval($in['defaultRole']);
+        $out['defaultScopes'] = (array)$in['defaultScopes'];
         return $out;
 
     }
@@ -159,6 +163,32 @@ class Settings
 
         return $file . ' not readable or not found';
 
+    }
+
+    private function get_roles_array()
+    {
+        $api = new API();
+        $response = $api->getRolesList();
+
+        return $this->check_and_return_response($response);
+
+    }
+
+    private function get_scopes_array()
+    {
+        $api = new API();
+        $response = $api->getScopesList();
+
+        return $this->check_and_return_response($response);
+
+    }
+
+    private function check_and_return_response($response)
+    {
+        if (isset($response['http_code']) && $response['http_code'] == 200) {
+            return $response['data'];
+        }
+        return array();
     }
 
 }

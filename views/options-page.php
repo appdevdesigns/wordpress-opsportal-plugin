@@ -24,6 +24,34 @@
                             <p class="description">Example: <code>http://192.168.1.210:1337</code></p>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Default Role', WPOP_TEXT_DOMAIN); ?></th>
+                        <td><select name="ops_portal_options[defaultRole]">
+                                <option disabled value=""><?php _e('Select a Role', WPOP_TEXT_DOMAIN); ?></option>
+                                <?php
+                                foreach ($this->get_roles_array() as $role) {
+                                    //todo get label by current wp locale
+                                    echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . $role['translations'][0]['role_label'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Default Scopes', WPOP_TEXT_DOMAIN); ?></th>
+                        <td>
+                            <fieldset>
+                                <?php
+                                foreach ($this->get_scopes_array() as $scope) {
+                                    echo '<label><input type="checkbox" name="ops_portal_options[defaultScopes][]" ';
+                                    echo (in_array($scope['id'], $db['defaultScopes'])) ? ' checked ' : '';
+                                    echo ' value="' . $scope['id'] . '">';
+                                    echo $scope['label'] . '</label></option><br>';
+                                }
+                                ?>
+                            </fieldset>
+                        </td>
+                    </tr>
                 </table>
             </section>
             <section id="op-interface" class="tab-content">

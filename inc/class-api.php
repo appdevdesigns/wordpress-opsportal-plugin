@@ -46,6 +46,43 @@ class API
     }
 
     /**
+     * Get a list of roles available
+     *
+     * @GET
+     * @return array
+     */
+    public function getRolesList()
+    {
+        $token = $this->getCSRFTokenHeader();
+
+        return $this->http->curl(
+            $this->baseURL . 'appdev-core/permissionrole',
+            array(),
+            $token,
+            false
+        );
+    }
+
+
+    /**
+     * Get a list of scopes available
+     *
+     * @GET
+     * @return array
+     */
+    public function getScopesList()
+    {
+        $token = $this->getCSRFTokenHeader();
+
+        return $this->http->curl(
+            $this->baseURL . 'appdev-core/permissionscope',
+            array(),
+            $token,
+            false
+        );
+    }
+
+    /**
      * Get CSRF token response array
      *
      * @GET

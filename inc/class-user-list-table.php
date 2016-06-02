@@ -18,7 +18,7 @@ class User_List_Table
         add_action('manage_users_custom_column', array($this, 'show_column_value'), 10, 3);
 
         //http://wordpress.stackexchange.com/questions/121632/add-a-button-to-users-php
-        add_action('admin_footer', array($this, 'add_sync_button'), 11);
+        add_action('admin_footer', array($this, 'add_sync_option'), 11);
         add_action('load-users.php', array($this, 'do_bulk_user_sync'));
         add_action('admin_notices', array($this, 'add_admin_notice'));
     }
@@ -53,11 +53,17 @@ class User_List_Table
     /**
      * Add a option in bulk user select option box via javascript
      */
-    function add_sync_button()
+    function add_sync_option()
     {
         if (!$this->is_user_screen())
             return;
-        wp_enqueue_script('ops-users-list', plugins_url("/assets/js/users-page.js", WPOP_BASE_FILE), array('jquery'), WPOP_PLUGIN_VER, false);
+        ?>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $('<option>').val('op_bulk_sync').text('<?php _e('Sync to Ops Portal',WPOP_TEXT_DOMAIN) ?>').appendTo("select#bulk-action-selector-top");
+            });
+        </script>
+        <?php
     }
 
     /**
@@ -66,9 +72,10 @@ class User_List_Table
     function do_bulk_user_sync()
     {
         if ($this->is_valid_request()) {
-            //$selected_users = $_GET['users'];
+            $selected_users = $_GET['users'];
+
             $this->sync = new User_Sync();
-            $this->sync->create_bulk_users();
+            $this->sync->create_bulk_users($selected_users);
         }
 
     }
@@ -78,10 +85,8 @@ class User_List_Table
      */
     function add_admin_notice()
     {
-        if (!$this->is_user_screen())
-            return;
-        if ($this->is_valid_request()) {
-            echo '<div class="notice notice-info is-dismissible"><p><b>' . __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN) . '</b></p></div>';
+        if ($this->is_user_screen() && $this->is_valid_request()) {
+            echo '<div class="updated notice notice-success is-dismissible"><p><b>' . __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN) . '</b></p></div>';
         }
 
     }
@@ -103,6 +108,6 @@ class User_List_Table
      */
     private function is_valid_request()
     {
-        return (isset($_GET['action']) && isset($_GET['op_bulk_sync']) && $_GET['op_bulk_sync'] === 'sync');
+        return (isset($_GET['action']) && isset($_GET['users']) && $_GET['action'] === 'op_bulk_sync');
     }
 }

@@ -43,10 +43,11 @@ class User_Sync
 
     /**
      * Sync users in bulk
+     * @param $user_ids array
      */
-    public function create_bulk_users()
+    public function create_bulk_users($user_ids)
     {
-        $users = $this->get_not_synced_users();
+        $users = $this->get_not_synced_users($user_ids);
 
         foreach ($users as $user) {
             $response = $this->api->createUser($this->build_create_user_request($user));
@@ -89,20 +90,24 @@ class User_Sync
     /**
      * Get a list of user those are not synced yet
      * @param $count bool Should return number of rows found or not
+     * @param $user_ids array Users ids
      * @return mixed
      */
-    public function get_not_synced_users($count = false)
+    public function get_not_synced_users($user_ids = array(), $count = false)
     {
         $args = array(
             'fields' => array('ID', 'user_login', 'user_email'),
             'meta_key' => self::sync_flag, 'meta_value' => 0
         );
+
+        if (count($user_ids)) {
+            $args['include'] = (array)$user_ids;
+        }
         //https://codex.wordpress.org/Class_Reference/WP_User_Query
         $users = new \WP_User_Query($args);
         return ($count) ? $users->get_total() : $users->get_results();
 
     }
-
 
     /**
      * Hook runs before user get deleted from WP Database

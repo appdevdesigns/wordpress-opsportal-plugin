@@ -1,6 +1,8 @@
 <?php
 
 namespace ITH\plugins\WP_Ops_Portal;
+//todo How can we replace this with WordPress inbuilt HTTP API - https://codex.wordpress.org/HTTP_API
+
 /**
  * Class Http
  *
@@ -15,14 +17,14 @@ class Http
     //Directory path; where to store logs
     private $log_dir;
 
-    //The cookie file will be created in temp folder
+    //The cookie file will be created in system's temp folder
     //Cookie file name will be same for each single php request
     private $cookie_file;
 
     private function __construct()
     {
         if (false === $this->is_curl_installed()) {
-            throw new \Exception('CURL is not installed');
+            throw new \Exception('CURL is not installed, Ops Portal Plugin requires CURL pre-installed.');
         }
 
         $this->log_dir = dirname(dirname(__FILE__)) . '/logs/';
@@ -106,7 +108,7 @@ class Http
      * @param $url string
      * @param $params array
      * @param $headers array
-     * @param $post bool is POST request
+     * @param $post bool Is POST request ?
      * @return mixed
      */
     public function createCurlObject($url, $params, $headers, $post)
@@ -175,7 +177,7 @@ class Http
     }
 
     /**
-     * Enable debugging based on wp-config.php
+     * Enable debugging based on wp-admin choice
      * @return bool
      */
     private function shouldDebug()
@@ -188,7 +190,7 @@ class Http
     }
 
     /**
-     * Check if CURL is installed on machine
+     * Check if CURL is installed on server
      * @return bool
      */
     private function is_curl_installed()

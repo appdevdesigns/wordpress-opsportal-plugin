@@ -20,7 +20,7 @@ class API
     private $http;
 
     //How long server response should be cached in wp db
-    const cache_time = 3600;
+    const cache_time = 3600; //seconds
 
     function __construct()
     {
@@ -59,7 +59,7 @@ class API
     {
         if ($cached == true) {
             $saved = get_transient('ops_portal_rolesList');
-            if ($saved !== false && !empty($saved)) {
+            if (!empty($saved)) {
                 return $saved;
             }
         }
@@ -89,7 +89,7 @@ class API
     {
         if ($cached == true) {
             $saved = get_transient('ops_portal_scopesList');
-            if ($saved !== false && !empty($saved)) {
+            if (!empty($saved)) {
                 return $saved;
             }
         }
@@ -141,7 +141,7 @@ class API
     {
         $db = get_option(WPOP_OPTION_NAME);
 
-        if (false !== $db && isset($db['baseURL'])) {
+        if (!empty($db) && isset($db['baseURL'])) {
             //notice: append a slash at end
             $this->baseURL = $db['baseURL'] . '/';
         }

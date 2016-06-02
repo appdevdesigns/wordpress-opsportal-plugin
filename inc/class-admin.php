@@ -14,13 +14,14 @@ class Admin
 
     function __construct()
     {
-        /* Add settings link under admin->settings menu */
+        // Add settings link under admin->settings menu
         add_action('admin_menu', array($this, 'add_to_settings_menu'));
 
-        /* Add settings link to plugin list page */
+        // Add settings link to plugin list page
         add_filter('plugin_action_links_' . plugin_basename(WPOP_BASE_FILE), array($this, 'add_plugin_actions_links'), 10, 2);
 
         //Be multilingual
+        //todo generate pot file , use PO-Edit
         //add_action('plugins_loaded', array($this, 'load_text_domain'));
 
         $this->settings = new Settings();

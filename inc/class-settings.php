@@ -10,7 +10,7 @@ class Settings
 
     function __construct()
     {
-        /* For register setting*/
+        // For register setting
         add_action('admin_init', array($this, 'register_plugin_settings'));
 
         // Check for database upgrades
@@ -22,7 +22,7 @@ class Settings
     }
 
     /**
-     * Carry default db options
+     * Return default db options
      * @return array
      */
     public function get_default_options()

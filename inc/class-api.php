@@ -10,7 +10,8 @@ namespace ITH\plugins\WP_Ops_Portal;
 class API
 {
 
-    //Base URL for Ops-Portal instance
+    //Base URL of Ops-Portal node-js instance
+    //Note:: baseURL will contains a trailing slash
     private $baseURL = '';
 
     //CSRF Token to send with all requests
@@ -46,6 +47,26 @@ class API
             $token,
             true  //is POST Request
         );
+    }
+
+    /**
+     * Set role and scope for a user
+     *
+     * @POST
+     * @param $data array
+     * @return array
+     */
+    public function setRoleScopes($data)
+    {
+        $token = $this->getCSRFTokenHeader();
+
+        return $this->http->curl(
+            $this->baseURL . 'appdev-core/permission',
+            $data,
+            $token,
+            true
+        );
+
     }
 
     /**

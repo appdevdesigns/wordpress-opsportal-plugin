@@ -12,9 +12,6 @@ class User_Sync
     //API class instance
     private $api;
 
-    //user_meta key name
-    const sync_flag = 'op_synced';
-
     function __construct()
     {
         //https://codex.wordpress.org/Plugin_API/Action_Reference/user_register
@@ -37,6 +34,7 @@ class User_Sync
         $user = get_userdata($user_id);
         $response = $this->api->createUser($this->build_create_user_request($user));
         $this->add_user_meta($user_id, $response);
+        $this->set_user_role_and_scopes($response);
         return $response;
 
     }
@@ -52,6 +50,7 @@ class User_Sync
         foreach ($users as $user) {
             $response = $this->api->createUser($this->build_create_user_request($user));
             $this->add_user_meta($user->ID, $response);
+            $this->set_user_role_and_scopes($response);
 
         }
 
@@ -65,11 +64,31 @@ class User_Sync
     {
         return array(
             'username' => $user->user_login,
-            //'password'=>'', //Should we also send password, no ?
             'email' => $user->user_email,
             //'guid' => uniqid('', true), //Don't send, server will auto generate it
             'isActive' => 1 //Activate as soon as they register ?
         );
+    }
+
+    /**
+     * Set role and scope for newly inserted user
+     * @param $response array Server response from create user endpoint
+     */
+    private function set_user_role_and_scopes($response)
+    {
+        if (isset($response['http_code']) && $response['http_code'] == 201) {
+            $db = get_option(WPOP_OPTION_NAME);
+            //The default role and scope should exist
+            if (!empty($db['defaultRole']) && !empty($db['defaultScopes'])) {
+                $this->api->setRoleScopes(array(
+                    'user' => $response['data']['id'],
+                    'role' => $db['defaultRole'],
+                    'scope' => $db['defaultScopes'], //array of ids
+                    'enabled' => true
+                ));
+            }
+
+        }
     }
 
     /**
@@ -84,7 +103,7 @@ class User_Sync
             $op_synced = 1;
             update_user_meta($user_id, 'op_user_id', $response['data']['id']);
         }
-        update_user_meta($user_id, self::sync_flag, $op_synced);
+        update_user_meta($user_id, 'op_synced', $op_synced);
     }
 
     /**
@@ -97,7 +116,7 @@ class User_Sync
     {
         $args = array(
             'fields' => array('ID', 'user_login', 'user_email'),
-            'meta_key' => self::sync_flag, 'meta_value' => 0
+            'meta_key' => 'op_synced', 'meta_value' => 0
         );
 
         if (count($user_ids)) {

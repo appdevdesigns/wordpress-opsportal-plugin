@@ -31,6 +31,7 @@ class User_List_Table
     function add_new_column($columns)
     {
         $columns['op_synced'] = 'Synced';
+        $columns['op_user_id'] = 'Ops Portal ID';
         return $columns;
     }
 
@@ -46,6 +47,9 @@ class User_List_Table
         $user = get_userdata($user_id);
         if ('op_synced' == $column_name)
             return ($user->op_synced == 1) ? '<span style="color: #00a000">' . __('Yes') . '</span>' : '<span style="color: #ac0404">' . __('No') . '</span>';
+
+        if ('op_user_id' == $column_name)
+            return (empty($user->op_user_id)) ? 'NA' : $user->op_user_id;
 
         return $value;
     }

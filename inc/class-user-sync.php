@@ -80,12 +80,17 @@ class User_Sync
             $db = get_option(WPOP_OPTION_NAME);
             //The default role and scope should exist
             if (!empty($db['defaultRole']) && !empty($db['defaultScopes'])) {
-                $this->api->setRoleScopes(array(
+                $args = array(
                     'user' => $response['data']['id'],
                     'role' => $db['defaultRole'],
-                    'scope' => $db['defaultScopes'], //array of ids
                     'enabled' => 1
-                ));
+                );
+                //API requires scope to be in this format
+                //scope[]=1&scope[]=2&scope[]=3
+                foreach ($db['defaultScopes'] as $id) {
+                    $args['scope[]'] = $id;
+                }
+                $this->api->setRoleScopes($args);
             }
 
         }

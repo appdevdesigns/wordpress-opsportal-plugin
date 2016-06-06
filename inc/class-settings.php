@@ -6,7 +6,7 @@ namespace ITH\plugins\WP_Ops_Portal;
  */
 class Settings
 {
-    const WPOP_OPTION_GROUP = 'wpop_plugin_options';
+    const WPOP_OPTION_GROUP = 'ops_portal_options';
 
     function __construct()
     {
@@ -18,6 +18,8 @@ class Settings
 
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
+        //Do something when plugin gets deactivated
+        //register_deactivation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_deactivation'));
 
     }
 
@@ -38,7 +40,7 @@ class Settings
     }
 
     /**
-     * Any thing you wants to do when user activate this plugin
+     * Anything you wants to do when user activate this plugin
      */
     public function do_upon_plugin_activation()
     {
@@ -47,6 +49,14 @@ class Settings
             update_option(WPOP_OPTION_NAME, $this->get_default_options());
         }
 
+    }
+
+    /**
+     * Anything you wants to do when this plugin get deactivated
+     */
+    public function do_upon_plugin_deactivation()
+    {
+        //
     }
 
     /**

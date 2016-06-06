@@ -15,7 +15,7 @@ class User_Sync
     function __construct()
     {
         //https://codex.wordpress.org/Plugin_API/Action_Reference/user_register
-        add_action('user_register', array($this, 'create_ops_portal_user'), 10, 1);
+        add_action('user_register', array($this, 'create_single_user'), 10, 1);
 
         //https://codex.wordpress.org/Plugin_API/Action_Reference/delete_user
         //add_action('delete_user', array($this, 'delete_ops_portal_user'), 10, 1);
@@ -28,7 +28,7 @@ class User_Sync
      * @param $user_id
      * @return array
      */
-    public function create_ops_portal_user($user_id)
+    public function create_single_user($user_id)
     {
         //https://codex.wordpress.org/Function_Reference/get_userdata
         $user = get_userdata($user_id);
@@ -41,7 +41,7 @@ class User_Sync
 
     /**
      * Sync users in bulk
-     * @param $user_ids array
+     * @param $user_ids array Array of user ids
      */
     public function create_bulk_users($user_ids)
     {
@@ -84,7 +84,7 @@ class User_Sync
                     'user' => $response['data']['id'],
                     'role' => $db['defaultRole'],
                     'scope' => $db['defaultScopes'], //array of ids
-                    'enabled' => true
+                    'enabled' => 1
                 ));
             }
 

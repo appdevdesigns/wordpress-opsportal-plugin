@@ -6,7 +6,7 @@ Plugin Name: WP Ops Portal
 Plugin URI: https://github.com/ithands
 Description: Ops Portal for WordPress
 Version: 1.0.0
-Author: Ithands
+Author: ITHands
 Author URI: http://ithands.com
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,16 +39,16 @@ function ops_class_autoloader($class_name)
     //Make sure this loader work only for this plugin's related classes
     if (false !== strpos($class_name, __NAMESPACE__)) {
         //Find class name, remove namespace prefix
-        $cls = str_replace(__NAMESPACE__ . "\\", '', $class_name);
+        $class = str_replace(__NAMESPACE__ . "\\", '', $class_name);
         //Replace _ with - , so class names should be like: Fist_Second_Third and class file name should be like class-first-second-third.php
-        $cls = strtolower(str_replace('_', '-', $cls));
+        $class = strtolower(str_replace('_', '-', $class));
         //Class file with full path
-        $cls_file = __DIR__ . "/inc/class-" . $cls . ".php";
+        $class_file = __DIR__ . "/inc/class-" . $class . ".php";
 
-        if (is_readable($cls_file)) {
-            require_once $cls_file;
+        if (is_readable($class_file)) {
+            require_once $class_file;
         } else {
-            throw new \Exception('Class file - ' . esc_html($cls_file) . ' not found or not readable');
+            throw new \Exception('Class file - ' . esc_html($class_file) . ' not found or not readable');
         }
     }
 }

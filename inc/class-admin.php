@@ -15,14 +15,14 @@ class Admin
     function __construct()
     {
         // Add settings link under admin->settings menu
-        add_action('admin_menu', array($this, 'add_to_settings_menu'));
+        add_action('admin_menu', array($this, 'add_link_to_settings_menu'));
 
         // Add settings link to plugin list page
         add_filter('plugin_action_links_' . plugin_basename(WPOP_BASE_FILE), array($this, 'add_plugin_actions_links'), 10, 2);
 
         //Be multilingual
         //todo generate pot file , use PO-Edit
-        //add_action('plugins_loaded', array($this, 'load_text_domain'));
+        //add_action('plugins_loaded', array($this, 'do_upon_plugins_loaded'));
 
         $this->settings = new Settings();
         new User_List_Table();
@@ -33,7 +33,7 @@ class Admin
     /**
      * Adds link to Plugin Option page and do related stuff
      */
-    function add_to_settings_menu()
+    function add_link_to_settings_menu()
     {
         $page_hook_suffix = add_submenu_page(
             'options-general.php',
@@ -67,7 +67,10 @@ class Admin
         return $links;
     }
 
-    function load_text_domain()
+    /**
+     * Anything you wants to do when all plugins has been loaded
+     */
+    function do_upon_plugins_loaded()
     {
         load_plugin_textdomain(WPOP_TEXT_DOMAIN, false, dirname(plugin_basename(WPOP_BASE_FILE)) . '/languages/');
     }

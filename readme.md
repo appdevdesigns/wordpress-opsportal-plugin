@@ -8,12 +8,14 @@
 * WordPress v4.0 or above
 * php CURL Extension
 
-### Setup on localhost
+### Setup this project on localhost
 * Install [WordPress](https://roots.io/bedrock/)
 ```
 composer create-project roots/bedrock wordpress "1.6.*"
 ```
 * Copy ```.env.example``` to ```.env``` and update environment variables
+* Create a virtual host (example: wp-test.local) that points to ```web``` folder
+* Open ```http://wp-test.local``` and go through wordpress installation
 * Clone this plugin inside WordPress plugins folder
 ```
 cd wordpress/web/app/plugins

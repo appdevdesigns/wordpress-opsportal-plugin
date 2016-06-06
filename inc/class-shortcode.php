@@ -23,10 +23,11 @@ class Shortcode
     {
         ob_start();// ob_start is here for a reason
         $db = get_option(WPOP_OPTION_NAME);
+        $theme = empty($db['defaultTheme']) ? '' : 'styles/opsportal-theme-wp-' . esc_attr($db['defaultTheme']);
 
         if (!empty($db['baseURL'])) {
             ?> <!-- ==== Ops Portal Start ==== -->
-            <div id="portal" class="wp-ops-portal"></div>
+            <div appdev-opsportal="default" portal-theme="<?php echo $theme ?>"></div>
             <script
                 async="async"
                 defer="defer"

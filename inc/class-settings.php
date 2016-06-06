@@ -36,6 +36,7 @@ class Settings
             'debugCURL' => 0,
             'defaultRole' => '',
             'defaultScopes' => array(),
+            'defaultTheme' => 0
         );
     }
 
@@ -148,6 +149,7 @@ class Settings
         $out['debugCURL'] = isset($in['debugCURL']);
         $out['defaultRole'] = intval($in['defaultRole']);
         $out['defaultScopes'] = (array)$in['defaultScopes'];
+        $out['defaultTheme'] = intval($in['defaultTheme']);
         return $out;
 
     }
@@ -199,6 +201,21 @@ class Settings
             return $response['data'];
         }
         return array();
+    }
+
+    /**
+     * Return themes array
+     * @return array
+     */
+    private function get_themes()
+    {
+        return array(
+            0 => __('Default', WPOP_TEXT_DOMAIN),
+            1 => __('Red', WPOP_TEXT_DOMAIN),
+            2 => __('Green', WPOP_TEXT_DOMAIN),
+            3 => __('Blue', WPOP_TEXT_DOMAIN),
+            4 => __('Yellow', WPOP_TEXT_DOMAIN),
+        );
     }
 
 }

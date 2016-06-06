@@ -55,7 +55,24 @@
                 </table>
             </section>
             <section id="op-interface" class="tab-content">
-                <p>Interface options goes here</p>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><?php _e('Default theme', WPOP_TEXT_DOMAIN) ?> :</th>
+                        <td>
+                            <fieldset>
+                                <?php
+                                foreach ($this->get_themes() as $id => $name) {
+                                    echo '<label>';
+                                    echo '<input type="radio" name="ops_portal_options[defaultTheme]" ';
+                                    echo 'value="' . $id . '" ' . checked($db['defaultTheme'], $id, false);
+                                    echo '>&ensp;' . $name;
+                                    echo '</label><br>';
+                                }
+                                ?>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </table>
             </section>
             <section id="op-troubleshoot" class="tab-content">
                 <table class="form-table">

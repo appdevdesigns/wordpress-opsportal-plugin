@@ -18,8 +18,7 @@ class Settings
 
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
-        //Do something when plugin gets deactivated
-        register_deactivation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_deactivation'));
+
 
     }
 
@@ -50,23 +49,6 @@ class Settings
             update_option(WPOP_OPTION_NAME, $this->get_default_options());
         }
 
-    }
-
-    /**
-     * Anything you wants to do when this plugin get deactivated
-     */
-    public function do_upon_plugin_deactivation()
-    {
-        //These transient were created by API class
-        //Note:: All transients prefixed with 'ops_portal_'
-        $transients = array(
-            'ops_portal_scopesList',
-            'ops_portal_rolesList',
-            'ops_portal_themesList',
-        );
-        foreach ($transients as $name) {
-            delete_transient($name);
-        }
     }
 
     /**

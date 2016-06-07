@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2>Ops Portal Configs</h2>
+    <h2><?php _e('Ops Portal Configs', WPOP_TEXT_DOMAIN) ?></h2>
 
     <h2 class="nav-tab-wrapper" id="op-tabs">
         <a class="nav-tab" id="op-general-tab" href="#top#op-general"><?php _e('General', WPOP_TEXT_DOMAIN) ?></a>
@@ -21,7 +21,8 @@
                         <td>
                             <input type="text" size="25" name="ops_portal_options[baseURL]"
                                    value="<?php echo esc_attr($db['baseURL']); ?>">
-                            <p class="description">Example: <code>http://192.168.1.210:1337</code></p>
+                            <p class="description"><?php _e('Example', WPOP_TEXT_DOMAIN) ?>: <code>http://192.168.1.210:1337</code>
+                            </p>
                         </td>
                     </tr>
                     <tr>

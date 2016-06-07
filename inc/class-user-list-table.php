@@ -38,18 +38,18 @@ class User_List_Table
     /**
      * Return the newly added column value
      * @param $value
-     * @param $column_name
+     * @param $column_id
      * @param $user_id
      * @return string
      */
-    function show_column_value($value, $column_name, $user_id)
+    function show_column_value($value, $column_id, $user_id)
     {
         $user = get_userdata($user_id);
-        if ('op_synced' == $column_name)
+        if ('op_synced' == $column_id)
             return ($user->op_synced == 1) ? '<span style="color: #00a000">' . __('Yes') . '</span>' : '<span style="color: #ac0404">' . __('No') . '</span>';
 
-        if ('op_user_id' == $column_name)
-            return (empty($user->op_user_id)) ? 'NA' : $user->op_user_id;
+        if ('op_user_id' == $column_id)
+            return (empty($user->op_user_id)) ? __('NA', WPOP_TEXT_DOMAIN) : $user->op_user_id;
 
         return $value;
     }
@@ -64,7 +64,7 @@ class User_List_Table
         ?>
         <script type="text/javascript">
             jQuery(function ($) {
-                $('<option>').val('op_bulk_sync').text('<?php _e('Sync to Ops Portal',WPOP_TEXT_DOMAIN) ?>').appendTo("select#bulk-action-selector-top");
+                $('<option>').val('op_bulk_sync').text('<?php _e('Sync to Ops Portal', WPOP_TEXT_DOMAIN) ?>').appendTo("select#bulk-action-selector-top");
             });
         </script>
         <?php

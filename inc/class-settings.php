@@ -170,13 +170,13 @@ class Settings
         if (is_readable($file_path)) {
             $contents = file_get_contents($file_path);
             if (trim($contents) === '') {
-                return 'File is empty';
+                return __('File is empty', WPOP_TEXT_DOMAIN);
             } else {
                 return $contents;
             }
         }
 
-        return $file . ' not readable or not found';
+        return $file . ' ' . __('not readable or not found', WPOP_TEXT_DOMAIN);
 
     }
 

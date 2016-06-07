@@ -9,22 +9,29 @@
 * php CURL Extension
 
 ### Setup this project on localhost
-* Install [WordPress](https://roots.io/bedrock/)
-```
-composer create-project roots/bedrock wordpress "1.6.*"
+* **Install [WordPress](https://roots.io/bedrock/)**
+```bash
+composer create-project roots/bedrock wordpress "1.6.*" --prefer-dist
 ```
 * Copy ```.env.example``` to ```.env``` and update environment variables
-* Create a virtual host (example: wp-test.local) that points to ```web``` folder
-* Open ```http://wp-test.local``` and go through wordpress installation
-* Clone this plugin inside WordPress plugins folder
+```bash
+cd wordpress
+cp .env.example .env
+nano .env
 ```
-cd wordpress/web/app/plugins
+* Create a virtual host (example: wp-test.local) that points to ```web``` folder
+* Open ```http://wp-test.local``` and go through WordPress installation process, it should not ask you database credentials because you already have them in ```.env```
+* You can also check ```./config/environments/development.php``` file for constants
+
+* **Clone this plugin inside WordPress plugins folder**
+```bash
+cd web/app/plugins
 git clone https://github.com/ithands/wp-ops-portal.git
 cd wp-ops-portal
 git checkout dev
 ```
 * Give write permissions on ```logs``` folder if you want to debug CURL
-```
+```bash
 sudo chmod -R 775 logs
 sudo chown -R www-data:www-data logs
 ```

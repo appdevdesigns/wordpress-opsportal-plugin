@@ -59,8 +59,14 @@ class Settings
     {
         //These transient were created by API class
         //Note:: All transients prefixed with 'ops_portal_'
-        delete_transient('ops_portal_scopesList');
-        delete_transient('ops_portal_rolesList');
+        $transients = array(
+            'ops_portal_scopesList',
+            'ops_portal_rolesList',
+            'ops_portal_themesList',
+        );
+        foreach ($transients as $name) {
+            delete_transient($name);
+        }
     }
 
     /**

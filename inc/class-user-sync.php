@@ -48,6 +48,7 @@ class User_Sync
      */
     public function create_bulk_users($user_ids)
     {
+        $user_ids = array_unique($user_ids);
         $users = $this->get_not_synced_users($user_ids);
 
         foreach ($users as $user) {

@@ -75,11 +75,14 @@ class User_List_Table
      */
     function do_bulk_user_sync()
     {
-        if ($this->is_valid_request()) {
+        if (isset($_GET['action']) && $_GET['action'] === 'op_bulk_sync' && isset($_GET['users'])) {
             $selected_users = $_GET['users'];
 
             $this->sync = new User_Sync();
             $this->sync->create_bulk_users($selected_users);
+            //It is required to redirect user to same page, this will remove any query string from page, prevent re-submission
+            wp_redirect(admin_url('/users.php?op_synced=1'), 301);
+            exit;
         }
 
     }
@@ -89,7 +92,7 @@ class User_List_Table
      */
     function add_admin_notice()
     {
-        if ($this->is_user_screen() && $this->is_valid_request()) {
+        if ($this->is_user_screen() && isset($_GET['op_synced'])) {
             echo '<div class="updated notice notice-success is-dismissible"><p><b>' . __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN) . '</b></p></div>';
         }
 
@@ -106,12 +109,4 @@ class User_List_Table
 
     }
 
-    /**
-     * Check if $_GET params are correct
-     * @return bool
-     */
-    private function is_valid_request()
-    {
-        return (isset($_GET['action']) && isset($_GET['users']) && $_GET['action'] === 'op_bulk_sync');
-    }
 }

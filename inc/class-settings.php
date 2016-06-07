@@ -222,4 +222,40 @@ class Settings
         );
     }
 
+    /**
+     * Get WordPress' current language code
+     * @param bool $short Return short version like 'en' when true
+     * @return mixed
+     */
+    private function get_wp_lang_code($short = true)
+    {
+        $code = get_bloginfo('language');
+        if ($short == true) {
+            return substr($code, 0, 2);
+        }
+        return $code;
+
+    }
+
+    /**
+     * Search for current wp locale in given array; if not found return first
+     * @param $translations array
+     * @return string localized label
+     */
+    private function get_localized_label($translations)
+    {
+        $locale = $this->get_wp_lang_code(true);
+        $found = array_filter($translations, function ($item) use ($locale) {
+            return ($item['language_code'] === $locale);
+        });
+        if (!empty($found) && count($found)) {
+            //array_filter may return array of array,but we want only first item in array
+            $found = current($found);
+            return $found['role_label'];
+        } else {
+            return $translations[0]['role_label'];
+        }
+
+    }
+
 }

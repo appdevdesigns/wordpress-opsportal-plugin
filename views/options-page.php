@@ -31,8 +31,7 @@
                                 <option disabled value=""><?php _e('Select a Role', WPOP_TEXT_DOMAIN); ?></option>
                                 <?php
                                 foreach ($this->get_roles_array() as $role) {
-                                    //todo get label by current wp locale
-                                    echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . $role['translations'][0]['role_label'] . '</option>';
+                                    echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . $this->get_localized_label($role['translations']) . '</option>';
                                 }
                                 ?>
                             </select>

@@ -93,7 +93,7 @@ class API
             false
         );
 
-        $this->check_and_set_transient('ops_portal_rolesList', $response);
+        $this->checkAndSetTransient('ops_portal_rolesList', $response);
         return $response;
     }
 
@@ -122,7 +122,35 @@ class API
             false
         );
 
-        $this->check_and_set_transient('ops_portal_scopesList', $response);
+        $this->checkAndSetTransient('ops_portal_scopesList', $response);
+        return $response;
+    }
+
+    /**
+     * Get a list of themes available
+     *
+     * @GET
+     * @param $cached bool Check for saved response first
+     * @return array
+     */
+    public function getThemesList($cached = true)
+    {
+        if ($cached == true) {
+            $saved = get_transient('ops_portal_themesList');
+            if (!empty($saved)) {
+                return $saved;
+            }
+        }
+
+        $token = $this->getCSRFTokenHeader();
+        $response = $this->http->curl(
+            $this->baseURL . 'opstool-wordpress-plugin/theme',
+            array(),
+            $token,
+            false
+        );
+
+        $this->checkAndSetTransient('ops_portal_themesList', $response);
         return $response;
     }
 
@@ -131,7 +159,7 @@ class API
      * @param $name  string Transient name
      * @param $response array Server response
      */
-    private function check_and_set_transient($name, $response)
+    private function checkAndSetTransient($name, $response)
     {
         if (isset($response['http_code']) && $response['http_code'] == 200) {
             //https://codex.wordpress.org/Transients_API

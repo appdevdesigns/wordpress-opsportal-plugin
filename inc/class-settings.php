@@ -152,7 +152,7 @@ class Settings
         $out['debugCURL'] = isset($in['debugCURL']);
         $out['defaultRole'] = intval($in['defaultRole']);
         $out['defaultScopes'] = (array)$in['defaultScopes'];
-        $out['defaultTheme'] = intval($in['defaultTheme']);
+        $out['defaultTheme'] = sanitize_text_field($in['defaultTheme']);
         return $out;
 
     }
@@ -198,28 +198,32 @@ class Settings
 
     }
 
+    private function get_themes_array()
+    {
+        $api = new API();
+        $response = $api->getThemesList();
+
+        //default theme does not exist
+        $themes[] = array(
+            'path' => 0,
+            'name' => __('Default', WPOP_TEXT_DOMAIN)
+        );
+
+        $data = $this->check_and_return_response($response);
+        //theme endpoint returns response in a different format
+        if (isset($data['status']) && $data['status'] == 'success') {
+            return array_merge($themes, $data['data']);
+        }
+        return $themes;
+
+    }
+
     private function check_and_return_response($response)
     {
         if (isset($response['http_code']) && $response['http_code'] == 200) {
             return $response['data'];
         }
         return array();
-    }
-
-    /**
-     * Return themes array
-     * @return array
-     */
-    private function get_themes()
-    {
-        //todo Get themes from API
-        return array(
-            0 => __('Default', WPOP_TEXT_DOMAIN),
-            1 => __('Red', WPOP_TEXT_DOMAIN),
-            2 => __('Green', WPOP_TEXT_DOMAIN),
-            3 => __('Blue', WPOP_TEXT_DOMAIN),
-            4 => __('Yellow', WPOP_TEXT_DOMAIN),
-        );
     }
 
     /**

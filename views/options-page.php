@@ -61,11 +61,11 @@
                         <td>
                             <fieldset>
                                 <?php
-                                foreach ($this->get_themes() as $id => $name) {
+                                foreach ($this->get_themes_array() as $theme) {
                                     echo '<label>';
                                     echo '<input type="radio" name="ops_portal_options[defaultTheme]" ';
-                                    echo 'value="' . $id . '" ' . checked($db['defaultTheme'], $id, false);
-                                    echo '>&ensp;' . $name;
+                                    echo 'value="' . $theme['path'] . '" ' . checked($db['defaultTheme'], $theme['path'], false);
+                                    echo '>&ensp;' . ucwords($theme['name']);
                                     echo '</label><br>';
                                 }
                                 ?>

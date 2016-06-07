@@ -93,8 +93,7 @@ class API
             false
         );
 
-        //https://codex.wordpress.org/Transients_API
-        set_transient('ops_portal_rolesList', $response, self::cache_time);
+        $this->check_and_set_transient('ops_portal_rolesList', $response);
         return $response;
     }
 
@@ -123,8 +122,22 @@ class API
             false
         );
 
-        set_transient('ops_portal_scopesList', $response, self::cache_time);
+        $this->check_and_set_transient('ops_portal_scopesList', $response);
         return $response;
+    }
+
+    /**
+     * Check server response and store it into persistent storage
+     * @param $name  string Transient name
+     * @param $response array Server response
+     */
+    private function check_and_set_transient($name, $response)
+    {
+        if (isset($response['http_code']) && $response['http_code'] == 200) {
+            //https://codex.wordpress.org/Transients_API
+            set_transient($name, $response, self::cache_time);
+        }
+
     }
 
     /**

@@ -19,7 +19,7 @@ class Settings
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
         //Do something when plugin gets deactivated
-        //register_deactivation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_deactivation'));
+        register_deactivation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_deactivation'));
 
     }
 
@@ -57,7 +57,10 @@ class Settings
      */
     public function do_upon_plugin_deactivation()
     {
-        //
+        //These transient were created by API class
+        //Note:: All transients prefixed with 'ops_portal_'
+        delete_transient('ops_portal_scopesList');
+        delete_transient('ops_portal_rolesList');
     }
 
     /**
@@ -138,7 +141,7 @@ class Settings
 
     /**
      * Validate posted form and return validated array
-     * @param $in
+     * @param $in array $_POST array
      * @return array
      */
     public function validate_form_post($in)
@@ -209,6 +212,7 @@ class Settings
      */
     private function get_themes()
     {
+        //todo Get themes from API
         return array(
             0 => __('Default', WPOP_TEXT_DOMAIN),
             1 => __('Red', WPOP_TEXT_DOMAIN),

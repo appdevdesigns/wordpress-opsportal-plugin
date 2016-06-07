@@ -11,6 +11,8 @@ class User_Sync
 {
     //API class instance
     private $api;
+    //Store plugin db options
+    private $db;
 
     function __construct()
     {
@@ -21,6 +23,7 @@ class User_Sync
         //add_action('delete_user', array($this, 'delete_ops_portal_user'), 10, 1);
 
         $this->api = new API();
+        $this->db = get_option(WPOP_OPTION_NAME);
     }
 
     /**
@@ -77,7 +80,7 @@ class User_Sync
     private function set_user_role_and_scopes($response)
     {
         if (isset($response['http_code']) && $response['http_code'] == 201) {
-            $db = get_option(WPOP_OPTION_NAME);
+            $db = $this->db;
             //The default role and scope should exist
             if (!empty($db['defaultRole']) && !empty($db['defaultScopes'])) {
                 $args = array(

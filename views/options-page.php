@@ -16,7 +16,7 @@
             <section id="op-general" class="tab-content">
                 <table class="form-table">
                     <tr>
-                        <th scope="row"><?php _e('Base URL', WPOP_TEXT_DOMAIN); ?></th>
+                        <th scope="row"><?php _e('Base URL', WPOP_TEXT_DOMAIN); ?> :</th>
                         <td>
                             <input type="text" size="25" name="ops_portal_options[baseURL]"
                                    value="<?php echo esc_attr($db['baseURL']); ?>">
@@ -25,7 +25,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e('Default Role', WPOP_TEXT_DOMAIN); ?></th>
+                        <th scope="row"><?php _e('Default Role', WPOP_TEXT_DOMAIN); ?> :</th>
                         <td><select name="ops_portal_options[defaultRole]">
                                 <option disabled value=""><?php _e('Select a Role', WPOP_TEXT_DOMAIN); ?></option>
                                 <?php
@@ -37,7 +37,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e('Default Scopes', WPOP_TEXT_DOMAIN); ?></th>
+                        <th scope="row"><?php _e('Default Scopes', WPOP_TEXT_DOMAIN); ?> :</th>
                         <td>
                             <fieldset>
                                 <?php

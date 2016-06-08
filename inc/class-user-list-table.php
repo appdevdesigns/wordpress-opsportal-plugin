@@ -81,7 +81,8 @@ class User_List_Table
             $this->sync = new User_Sync();
             $this->sync->create_bulk_users($selected_users);
             //It is required to redirect user to same page, this will remove any query string from page, prevent re-submission
-            wp_redirect(admin_url('/users.php?op_synced=1'), 301);
+            $paged = (isset($_GET['paged'])) ? '&paged=' . intval($_GET['paged']) : '';
+            wp_redirect(admin_url('/users.php?op_synced=1' . $paged), 301);
             exit;
         }
 

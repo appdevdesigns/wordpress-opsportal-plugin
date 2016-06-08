@@ -10,5 +10,5 @@
 if (!defined('WP_UNINSTALL_PLUGIN'))
     exit;
 
-//Delete database entry created by this plugin
+// Delete database entry created by this plugin
 delete_option('ops_portal_options');

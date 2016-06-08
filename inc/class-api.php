@@ -21,7 +21,7 @@ class API
     private $http;
 
     //How long server response should be cached in wp db
-    const cache_time = 3600; //seconds
+    const cacheTime = 3600; //seconds
 
     function __construct()
     {
@@ -163,7 +163,7 @@ class API
     {
         if (isset($response['http_code']) && $response['http_code'] == 200) {
             //https://codex.wordpress.org/Transients_API
-            set_transient($name, $response, self::cache_time);
+            set_transient($name, $response, self::cacheTime);
         }
 
     }

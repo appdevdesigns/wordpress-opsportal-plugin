@@ -180,6 +180,10 @@ class Settings
 
     }
 
+    /**
+     * The available roles array
+     * @return array
+     */
     private function get_roles_array()
     {
         $api = new API();
@@ -189,6 +193,10 @@ class Settings
 
     }
 
+    /**
+     * The available scopes array
+     * @return array
+     */
     private function get_scopes_array()
     {
         $api = new API();
@@ -198,6 +206,10 @@ class Settings
 
     }
 
+    /**
+     * The available themes array
+     * @return array
+     */
     private function get_themes_array()
     {
         $api = new API();
@@ -218,6 +230,10 @@ class Settings
 
     }
 
+    /** Check server response and always return array
+     * @param $response
+     * @return array
+     */
     private function check_and_return_response($response)
     {
         if (isset($response['http_code']) && $response['http_code'] == 200) {

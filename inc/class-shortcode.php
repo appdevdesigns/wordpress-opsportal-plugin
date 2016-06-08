@@ -33,7 +33,7 @@ class Shortcode
                 defer="defer"
                 type="text/javascript"
                 src="<?php echo esc_url($db['baseURL']) ?>/steal/steal.js?OpsPortal&ver=<?php echo urlencode(WPOP_PLUGIN_VER) ?>"
-                data-config="<?php echo esc_url($db['baseURL']) ?>/stealconfig.js">
+                config="<?php echo esc_url($db['baseURL']) ?>/stealconfig.js">
             </script>
             <!-- ==== Ops Portal Ends ==== -->
             <?php

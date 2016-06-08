@@ -15,20 +15,20 @@ class Http
     private static $instances = array();
 
     //Directory path; where to store logs
-    private $log_dir;
+    private $logDir;
 
     //The cookie file will be created in system's temp folder
     //Cookie file name will be same for each single php request
-    private $cookie_file;
+    private $cookieFile;
 
     private function __construct()
     {
-        if (false === $this->is_curl_installed()) {
-            throw new \Exception('CURL is not installed, Ops Portal Plugin requires CURL pre-installed.');
+        if (false === $this->isCurlInstalled()) {
+            trigger_error(__('CURL is not installed, Ops Portal Plugin requires CURL pre-installed', WPOP_TEXT_DOMAIN), E_USER_ERROR);
         }
 
-        $this->log_dir = dirname(dirname(__FILE__)) . '/logs/';
-        $this->cookie_file = tempnam(sys_get_temp_dir(), "curl_cookie");
+        $this->logDir = dirname(dirname(__FILE__)) . '/logs/';
+        $this->cookieFile = tempnam(sys_get_temp_dir(), "curl_cookie");
     }
 
     /**
@@ -87,7 +87,7 @@ class Http
 
         //Save response to a file for debugging
         if (self::shouldDebug()) {
-            $response = fopen($this->log_dir . 'curl_response.log', 'w');
+            $response = fopen($this->logDir . 'curl_response.log', 'w');
             fwrite($response, $data);
             fclose($response);
         }
@@ -137,8 +137,8 @@ class Http
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS => 2,
             CURLOPT_FRESH_CONNECT => true,
-            CURLOPT_COOKIEFILE => $this->cookie_file,
-            CURLOPT_COOKIEJAR => $this->cookie_file
+            CURLOPT_COOKIEFILE => $this->cookieFile,
+            CURLOPT_COOKIEJAR => $this->cookieFile
         );
 
 
@@ -146,7 +146,7 @@ class Http
         if (self::shouldDebug()) {
             $options += array(
                 CURLOPT_VERBOSE => true,
-                CURLOPT_STDERR => fopen($this->log_dir . 'curl_stderr.log', 'w')
+                CURLOPT_STDERR => fopen($this->logDir . 'curl_stderr.log', 'w')
             );
         }
 
@@ -193,7 +193,7 @@ class Http
      * Check if CURL is installed on server
      * @return bool
      */
-    private function is_curl_installed()
+    private function isCurlInstalled()
     {
         return (extension_loaded('curl') && function_exists('curl_version'));
 

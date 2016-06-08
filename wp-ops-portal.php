@@ -13,8 +13,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wp-ops-portal
 Domain Path: /languages
 */
-
-/* No direct access*/
+?><?php
+//No direct access
 if (!defined('ABSPATH')) die('Are you serious ?');
 
 define('WPOP_PLUGIN_VER', '1.0.0');
@@ -48,7 +48,7 @@ function ops_class_autoloader($class_name)
         if (is_readable($class_file)) {
             require_once $class_file;
         } else {
-            throw new \Exception('Class file - ' . esc_html($class_file) . ' not found or not readable');
+            trigger_error(sprintf(__('Error locating class file %s for inclusion', WPOP_TEXT_DOMAIN), $class_file), E_USER_ERROR);
         }
     }
 }

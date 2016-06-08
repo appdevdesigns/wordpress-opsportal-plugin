@@ -115,6 +115,18 @@ class Settings
             wp_die(__('You do not have sufficient permissions to access this page.'));
         }
 
+        $view = array(
+            'db' => $this->get_safe_options(),
+            'roles' => $this->get_roles_array(),
+            'scopes' => $this->get_scopes_array(),
+            'themes' => $this->get_themes_array(),
+            'curl_response' => $this->read_log_file('curl_response.log'),
+            'curl_stderr' => $this->read_log_file('curl_stderr.log'),
+        );
+        //make array keys available as variables to view template
+        extract($view);
+        unset($view);
+
         require plugin_dir_path(WPOP_BASE_FILE) . '/views/options-page.php';
 
     }

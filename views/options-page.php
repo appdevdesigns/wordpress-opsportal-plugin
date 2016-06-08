@@ -11,7 +11,6 @@
     <form action="<?php echo admin_url('options.php') ?>" method="post" id="wpop_form" novalidate>
         <?php
         settings_fields(self::WPOP_OPTION_GROUP);
-        $db = $this->get_safe_options();
         ?>
         <div class="tab-wrapper">
             <section id="op-general" class="tab-content">
@@ -30,7 +29,7 @@
                         <td><select name="ops_portal_options[defaultRole]">
                                 <option disabled value=""><?php _e('Select a Role', WPOP_TEXT_DOMAIN); ?></option>
                                 <?php
-                                foreach ($this->get_roles_array() as $role) {
+                                foreach ($roles as $role) {
                                     echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . $this->get_localized_label($role['translations']) . '</option>';
                                 }
                                 ?>
@@ -42,7 +41,7 @@
                         <td>
                             <fieldset>
                                 <?php
-                                foreach ($this->get_scopes_array() as $scope) {
+                                foreach ($scopes as $scope) {
                                     echo '<label><input type="checkbox" name="ops_portal_options[defaultScopes][]" ';
                                     echo (in_array($scope['id'], $db['defaultScopes'])) ? ' checked ' : '';
                                     echo ' value="' . $scope['id'] . '">';
@@ -61,7 +60,7 @@
                         <td>
                             <fieldset>
                                 <?php
-                                foreach ($this->get_themes_array() as $theme) {
+                                foreach ($themes as $theme) {
                                     echo '<label>';
                                     echo '<input type="radio" name="ops_portal_options[defaultTheme]" ';
                                     echo 'value="' . $theme['path'] . '" ' . checked($db['defaultTheme'], $theme['path'], false);
@@ -87,13 +86,13 @@
                     <tr>
                         <th scope="row"><?php _e('Last CURL response', WPOP_TEXT_DOMAIN) ?> :</th>
                         <td>
-                            <pre class="code-dump"><?php echo $this->read_log_file('curl_response.log') ?></pre>
+                            <pre class="code-dump"><?php echo $curl_response; ?></pre>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><?php _e('Last CURL stderr log', WPOP_TEXT_DOMAIN) ?> :</th>
                         <td>
-                            <pre class="code-dump"><?php echo $this->read_log_file('curl_stderr.log') ?></pre>
+                            <pre class="code-dump"><?php echo $curl_stderr; ?></pre>
                         </td>
                     </tr>
                     <tr>

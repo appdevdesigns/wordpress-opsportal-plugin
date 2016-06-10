@@ -1,11 +1,11 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /**
  * Class API
  *
  * Main class that interacts with Ops Portal APIs with help of Http class
- * @package ITH\plugins\WP_Ops_Portal
+ * @package ITH\Plugins\WP_Ops_Portal
  */
 class API
 {
@@ -22,6 +22,9 @@ class API
 
     //How long server response should be cached in wp db
     const cacheTime = 3600; //seconds
+
+    //Keep same prefix for all transients
+    const transientsPrefix = 'ops_portal_';
 
     function __construct()
     {
@@ -79,7 +82,7 @@ class API
     public function getRolesList($cached = true)
     {
         if ($cached == true) {
-            $saved = get_transient('ops_portal_rolesList');
+            $saved = get_transient(self::transientsPrefix . 'rolesList');
             if (!empty($saved)) {
                 return $saved;
             }
@@ -93,7 +96,7 @@ class API
             false
         );
 
-        $this->checkAndSetTransient('ops_portal_rolesList', $response);
+        $this->checkAndSetTransient(self::transientsPrefix . 'rolesList', $response);
         return $response;
     }
 
@@ -108,7 +111,7 @@ class API
     public function getScopesList($cached = true)
     {
         if ($cached == true) {
-            $saved = get_transient('ops_portal_scopesList');
+            $saved = get_transient(self::transientsPrefix . 'scopesList');
             if (!empty($saved)) {
                 return $saved;
             }
@@ -122,7 +125,7 @@ class API
             false
         );
 
-        $this->checkAndSetTransient('ops_portal_scopesList', $response);
+        $this->checkAndSetTransient(self::transientsPrefix . 'scopesList', $response);
         return $response;
     }
 

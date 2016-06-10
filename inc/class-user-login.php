@@ -1,9 +1,11 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /**
  * Class User_Login
- * @package ITH\plugins\WP_Ops_Portal
+ *
+ * Class responsible for cookie creation/deletion for local auth
+ * @package ITH\Plugins\WP_Ops_Portal
  */
 class User_Login
 {
@@ -13,6 +15,7 @@ class User_Login
     {
         //https://codex.wordpress.org/Plugin_API/Action_Reference/wp_login
         add_action('wp_login', array($this, 'do_after_login'), 10, 2);
+
         //https://codex.wordpress.org/Plugin_API/Action_Reference/wp_logout
         add_action('wp_logout', array($this, 'do_after_logout'));
     }

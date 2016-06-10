@@ -1,9 +1,9 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /**
  * Class Admin
- * @package ITH\plugins\WP_Ops_Portal
+ * @package ITH\Plugins\WP_Ops_Portal
  */
 class Admin
 {
@@ -35,7 +35,7 @@ class Admin
     /**
      * Adds link to Plugin Option page and do related stuff
      */
-    function add_link_to_settings_menu()
+    public function add_link_to_settings_menu()
     {
         $page_hook_suffix = add_submenu_page(
             'options-general.php',
@@ -55,9 +55,9 @@ class Admin
      * @param $links
      * @return array  Links array
      */
-    function add_plugin_actions_links($links)
+    public function add_plugin_actions_links($links)
     {
-
+        //Only visible to admins
         if (current_user_can('manage_options')) {
             $build_url = add_query_arg('page', self::PLUGIN_SLUG, 'options-general.php');
             array_unshift(
@@ -72,7 +72,7 @@ class Admin
     /**
      * Anything you wants to do when all plugins has been loaded
      */
-    function do_upon_plugins_loaded()
+    public function do_upon_plugins_loaded()
     {
         load_plugin_textdomain(WPOP_TEXT_DOMAIN, false, dirname(plugin_basename(WPOP_BASE_FILE)) . '/languages/');
     }
@@ -87,7 +87,7 @@ class Admin
 
         /**
          * Purge all the transients associated with our plugin.
-         * @source https://css-tricks.com/the-deal-with-wordpress-transients/
+         * @link https://css-tricks.com/the-deal-with-wordpress-transients/
          */
         global $wpdb;
 
@@ -113,7 +113,7 @@ class Admin
     /**
      * Use this function load any number of js or css on plugin option page
      */
-    function add_admin_assets()
+    public function add_admin_assets()
     {
         wp_enqueue_style('ops-admin', plugins_url('/assets/css/option-page.css', WPOP_BASE_FILE), array(), WPOP_PLUGIN_VER);
         wp_enqueue_script('ops-admin', plugins_url("/assets/js/option-page.js", WPOP_BASE_FILE), array('jquery'), WPOP_PLUGIN_VER, false);

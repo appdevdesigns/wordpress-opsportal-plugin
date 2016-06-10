@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ops Portal\n"
-"POT-Creation-Date: 2016-06-07 11:20+0530\n"
+"POT-Creation-Date: 2016-06-10 14:27+0530\n"
 "PO-Revision-Date: 2016-06-07 11:17+0530\n"
 "Last-Translator: \n"
 "Language-Team: ITHands\n"
@@ -21,40 +21,28 @@ msgstr ""
 "X-Poedit-SearchPath-1: inc\n"
 "X-Poedit-SearchPathExcluded-0: logs\n"
 
-#: inc/class-admin.php:63
+#: inc/class-admin.php:65
 msgid "Settings"
 msgstr ""
 
-#: inc/class-settings.php:127
+#: inc/class-http.php:27
+msgid "CURL is not installed, Ops Portal Plugin requires CURL pre-installed"
+msgstr ""
+
+#: inc/class-settings.php:115
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/class-settings.php:173
+#: inc/class-settings.php:174
 msgid "File is empty"
 msgstr ""
 
-#: inc/class-settings.php:179
+#: inc/class-settings.php:180
 msgid "not readable or not found"
 msgstr ""
 
-#: inc/class-settings.php:217
+#: inc/class-settings.php:222
 msgid "Default"
-msgstr ""
-
-#: inc/class-settings.php:218
-msgid "Red"
-msgstr ""
-
-#: inc/class-settings.php:219
-msgid "Green"
-msgstr ""
-
-#: inc/class-settings.php:220
-msgid "Blue"
-msgstr ""
-
-#: inc/class-settings.php:221
-msgid "Yellow"
 msgstr ""
 
 #: inc/class-user-list-table.php:49
@@ -73,7 +61,7 @@ msgstr ""
 msgid "Sync to Ops Portal"
 msgstr ""
 
-#: inc/class-user-list-table.php:93
+#: inc/class-user-list-table.php:97
 msgid "Bulk User Sync Finished !"
 msgstr ""
 
@@ -93,50 +81,50 @@ msgstr ""
 msgid "Troubleshoot"
 msgstr ""
 
-#: views/options-page.php:20
+#: views/options-page.php:19
 msgid "Base URL"
 msgstr ""
 
-#: views/options-page.php:24
+#: views/options-page.php:23
 msgid "Example"
 msgstr ""
 
-#: views/options-page.php:29
+#: views/options-page.php:28
 msgid "Default Role"
 msgstr ""
 
-#: views/options-page.php:31
+#: views/options-page.php:30
 msgid "Select a Role"
 msgstr ""
 
-#: views/options-page.php:42
+#: views/options-page.php:40
 msgid "Default Scopes"
 msgstr ""
 
-#: views/options-page.php:61
+#: views/options-page.php:59
 msgid "Default theme"
 msgstr ""
 
-#: views/options-page.php:81
+#: views/options-page.php:79
 msgid "Debug CURL"
 msgstr ""
 
-#: views/options-page.php:83
+#: views/options-page.php:81
 msgid "Log CURL calls"
 msgstr ""
 
-#: views/options-page.php:85
+#: views/options-page.php:83
 msgid "This should only be used temporarily or during development"
 msgstr ""
 
-#: views/options-page.php:89
+#: views/options-page.php:87
 msgid "Last CURL response"
 msgstr ""
 
-#: views/options-page.php:95
+#: views/options-page.php:93
 msgid "Last CURL stderr log"
 msgstr ""
 
-#: views/options-page.php:101
+#: views/options-page.php:99
 msgid "Database options dump"
 msgstr ""

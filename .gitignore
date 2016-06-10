@@ -3,7 +3,7 @@
 # http://git-scm.com/docs/gitignore
 
 # phpstorm, webstorm
-.idea
+.idea/
 
 # sublime and other ide
 .project
@@ -43,20 +43,20 @@ $RECYCLE.BIN/
 
 # node packages
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
-node_modules/
+/node_modules/
 
 
 # bower packages
-bower_components/
+/bower_components/
 
 # svn folders
-.svn
+.svn/
 
 # composer
-vendor/
+/vendor/
 composer.phar
 
 # project related
-logs/*
+/logs/*
 !logs/.htaccess
 

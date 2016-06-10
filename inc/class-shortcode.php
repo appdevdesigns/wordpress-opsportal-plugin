@@ -1,11 +1,11 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /**
  * Class Shortcode
  *
  * Register and process short-code on front-end
- * @package ITH\plugins\WP_Ops_Portal
+ * @package ITH\Plugins\WP_Ops_Portal
  */
 class Shortcode
 {
@@ -16,7 +16,9 @@ class Shortcode
     }
 
     /**
-     * Process short-code and outputs html
+     * Process short-code and outputs html 
+     * 
+     * @todo output valid html, prefix 'data' on custom attribute
      * @return mixed
      */
     public function process_shortcode()

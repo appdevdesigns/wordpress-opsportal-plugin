@@ -11,7 +11,7 @@
 ### Setup this project on localhost
 * **Install [WordPress](https://roots.io/bedrock/)**
 ```bash
-composer create-project roots/bedrock wordpress "1.6.*" --prefer-dist
+composer create-project roots/bedrock wordpress "1.6.*"
 ```
 * Copy ```.env.example``` to ```.env``` and update environment variables
 ```bash
@@ -19,9 +19,13 @@ cd wordpress
 cp .env.example .env
 nano .env
 ```
-* Create a virtual host (example: wp-test.local) that points to ```web``` folder
-* Open ```http://wp-test.local``` and go through WordPress installation process, it should not ask you database credentials because you already have them in ```.env```
-* You can also check ```./config/environments/development.php``` file for constants
+* Create a virtual host ```wp-test.local``` that points to ```web``` folder
+* Install WordPress via [WP CLI](https://wp-cli.org/commands/core/install/)
+```
+wp core install --url='http://wp-test.local' --title='WP Test' --admin_user='admin' --admin_password='admin' --admin_email='admin@wp.local' --skip-email
+```
+* Open ```http://wp-test.local/wp/wp-admin``` and login to wp-admin
+* You can also check ```./config/environments/development.php``` file for various constants
 
 * **Clone this plugin inside WordPress plugins folder**
 ```bash

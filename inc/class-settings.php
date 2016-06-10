@@ -1,8 +1,8 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 /**
  * Class Settings
- * @package ITH\plugins\WP_Ops_Portal
+ * @package ITH\Plugins\WP_Ops_Portal
  */
 class Settings
 {
@@ -115,6 +115,7 @@ class Settings
             wp_die(__('You do not have sufficient permissions to access this page.'));
         }
 
+        //The data you want to pass on view
         $view = array(
             'db' => $this->get_safe_options(),
             'roles' => $this->get_roles_array(),
@@ -123,7 +124,8 @@ class Settings
             'curl_response' => $this->read_log_file('curl_response.log'),
             'curl_stderr' => $this->read_log_file('curl_stderr.log'),
         );
-        //make array keys available as variables to view template
+        //WordPress discourage this function
+        //Make array keys available as variables to view template
         extract($view);
         unset($view);
 
@@ -269,7 +271,7 @@ class Settings
             return ($item['language_code'] === $locale);
         });
         if (!empty($found) && count($found)) {
-            //array_filter may return array of array,but we want only first item in array
+            //array_filter may return array of array, but we want only first item in array
             $found = current($found);
             return $found['role_label'];
         } else {

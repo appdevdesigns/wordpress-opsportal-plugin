@@ -1,13 +1,13 @@
 <?php
 
-namespace ITH\plugins\WP_Ops_Portal;
-//todo How can we replace this with WordPress inbuilt HTTP API - https://codex.wordpress.org/HTTP_API
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /**
  * Class Http
  *
  * A portable class that can be used anywhere to perform CURL calls
- * @package ITH\plugins\WP_Ops_Portal
+ * @package ITH\Plugins\WP_Ops_Portal
+ * @todo How can we replace this with WordPress inbuilt HTTP API - https://codex.wordpress.org/HTTP_API
  */
 class Http
 {
@@ -104,7 +104,7 @@ class Http
     /**
      * Create CURL object
      *
-     * @source http://php.net/manual/en/function.curl-setopt.php
+     * @link http://php.net/manual/en/function.curl-setopt.php
      * @param $url string
      * @param $params array
      * @param $headers array
@@ -166,7 +166,7 @@ class Http
     /**
      * Check if a string is a valid json
      *
-     * @source http://stackoverflow.com/questions/6041741/fastest-way-to-check-if-a-string-is-json-in-php
+     * @link http://stackoverflow.com/questions/6041741/fastest-way-to-check-if-a-string-is-json-in-php
      * @param $string
      * @return bool
      */

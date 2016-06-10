@@ -1,5 +1,5 @@
 <?php
-namespace ITH\plugins\WP_Ops_Portal;
+namespace ITH\Plugins\WP_Ops_Portal;
 
 /*
 Plugin Name: WP Ops Portal

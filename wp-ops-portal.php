@@ -65,5 +65,6 @@ if (is_admin() && (!defined('DOING_AJAX') || !DOING_AJAX)) {
     new Shortcode();
 }
 
-//Sync should be available for both wp-admin and public
+//These classes be available for both wp-admin and public
 new User_Sync();
+new User_Login();

@@ -1,5 +1,5 @@
-# Prevent direct access of php files in this folder
-<FilesMatch "\.(?i:php)$">
+# Prevent direct access any of files in this folder
+<FilesMatch "">
   <IfModule !mod_authz_core.c>
     Order allow,deny
     Deny from all

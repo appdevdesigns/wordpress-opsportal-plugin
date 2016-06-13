@@ -7,6 +7,7 @@
 * php v5.3.0 or v7.0.x
 * WordPress v4.0 or above
 * php CURL Extension
+* Running instance of Ops Portal
 
 ### Setup this project on localhost
 * **Install [WordPress](https://roots.io/bedrock/)**
@@ -36,9 +37,13 @@ git checkout dev
 ```
 * Give write permissions on ```logs``` folder if you want to debug CURL
 ```bash
-sudo chmod -R 775 logs
+sudo chmod -R 755 logs
 sudo chown -R www-data:www-data logs
 ```
+
+* **Install Ops Portal**
+* Follow [this](https://github.com/appdevdesigns/opsportal_docs/blob/master/develop/develop_setup.md) guide to install Ops Portal
+* Install [opstool-wordpress-plugin](https://github.com/appdevdesigns/opstool-wordpress-plugin)
 
 ### Plugin Installation Guide for End User
 - Download the plugin (zip) from GitHub (master branch)

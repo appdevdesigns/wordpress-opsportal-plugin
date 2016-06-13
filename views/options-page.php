@@ -86,13 +86,13 @@
                     <tr>
                         <th scope="row"><?php _e('Last CURL response', WPOP_TEXT_DOMAIN) ?> :</th>
                         <td>
-                            <pre class="code-dump"><?php echo $curl_response; ?></pre>
+                            <pre class="code-dump"><?php echo htmlentities2($curl_response); ?></pre>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><?php _e('Last CURL stderr log', WPOP_TEXT_DOMAIN) ?> :</th>
                         <td>
-                            <pre class="code-dump"><?php echo $curl_stderr; ?></pre>
+                            <pre class="code-dump"><?php echo htmlentities2($curl_stderr); ?></pre>
                         </td>
                     </tr>
                     <tr>

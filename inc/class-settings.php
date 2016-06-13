@@ -8,6 +8,8 @@ class Settings
 {
     const WPOP_OPTION_GROUP = 'ops_portal_options';
 
+    private $api;
+
     function __construct()
     {
         // For register setting
@@ -19,7 +21,7 @@ class Settings
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
 
-
+        $this->api = new API();
     }
 
     /**
@@ -188,8 +190,7 @@ class Settings
      */
     private function get_roles_array()
     {
-        $api = new API();
-        $response = $api->getRolesList();
+        $response = $this->api->getRolesList();
 
         return $this->check_and_return_response($response);
 
@@ -201,8 +202,7 @@ class Settings
      */
     private function get_scopes_array()
     {
-        $api = new API();
-        $response = $api->getScopesList();
+        $response = $this->api->getScopesList();
 
         return $this->check_and_return_response($response);
 
@@ -214,8 +214,7 @@ class Settings
      */
     private function get_themes_array()
     {
-        $api = new API();
-        $response = $api->getThemesList();
+        $response = $this->api->getThemesList();
 
         //default theme does not exist
         $themes[] = array(
@@ -278,6 +277,29 @@ class Settings
             return $translations[0]['role_label'];
         }
 
+    }
+
+    /**
+     * Check if Ops Portal is up and running
+     * Show a error notice when response code is not 200
+     */
+    public function add_admin_notice()
+    {
+        $db = $this->get_safe_options();
+
+        //If base URL not set return early
+        if (empty($db) || empty($db['baseURL'])) return;
+
+        $response = $this->api->callHome();
+        if (empty($response) || $response['http_code'] != 200):
+            ?>
+            <div class="notice notice-error is-dismissible">
+                <p><?php _e('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN) ?>:
+                    <b><?php echo $response['http_code']; ?></b>
+                </p>
+            </div>
+            <?php
+        endif;
     }
 
 }

@@ -21,6 +21,9 @@ class Http
     //Cookie file name will be same for each single php request
     private $cookieFile;
 
+    //Debug CURL
+    private $debug;
+
     private function __construct()
     {
         if (false === $this->isCurlInstalled()) {
@@ -29,6 +32,7 @@ class Http
 
         $this->logDir = dirname(dirname(__FILE__)) . '/logs/';
         $this->cookieFile = tempnam(sys_get_temp_dir(), "curl_cookie");
+        $this->debug = false;
     }
 
     /**
@@ -62,7 +66,7 @@ class Http
      * @param array $headers (default: array()) Headers array with key/value pairs to send
      * @param bool $post (default: false) True when sending with POST
      *
-     * @return array
+     * @return bool|array
      */
     public function curl($url, $params = array(), $headers = array(), $post = false)
     {
@@ -86,7 +90,7 @@ class Http
         $http_code = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         //Save response to a file for debugging
-        if (self::shouldDebug()) {
+        if ($this->debug === true) {
             $response = fopen($this->logDir . 'curl_response.log', 'w');
             fwrite($response, $data);
             fclose($response);
@@ -143,7 +147,7 @@ class Http
 
 
         //Write debug info in a text file
-        if (self::shouldDebug()) {
+        if ($this->debug === true) {
             $options += array(
                 CURLOPT_VERBOSE => true,
                 CURLOPT_STDERR => fopen($this->logDir . 'curl_stderr.log', 'w')
@@ -177,16 +181,12 @@ class Http
     }
 
     /**
-     * Enable debugging based on wp-admin choice
-     * @return bool
+     * Enable CURL debugging
+     * @param $val bool Enable when true
      */
-    private function shouldDebug()
+    public function setDebug($val = false)
     {
-        //Note:: get_option is WordPress function
-        //If you are planing to use this class somewhere else then do changes according to platform here
-        $db = get_option(WPOP_OPTION_NAME);
-        return (isset($db['debugCURL']) && $db['debugCURL'] == 1);
-
+        $this->debug = (bool)$val;
     }
 
     /**

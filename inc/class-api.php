@@ -26,10 +26,42 @@ class API
     //Keep same prefix for all transients
     const transientsPrefix = 'ops_portal_';
 
+    //Plugin options
+    private $db;
+
     function __construct()
     {
+        //Set some required vars
+        $this->db = get_option(WPOP_OPTION_NAME);
+        $this->baseURL = $this->getBaseUrl();
+
+        //HTTP Class instance
         $this->http = Http::get_instance();
-        $this->setBaseUrl();
+        $this->http->setDebug($this->curlDebug());
+
+
+    }
+
+    /**
+     * Get BaseURL for all CURL calls
+     * @return string
+     */
+    private function getBaseUrl()
+    {
+        if (!empty($this->db) && isset($this->db['baseURL'])) {
+            //notice: append a slash at end
+            return $this->db['baseURL'] . '/';
+        }
+        return '';
+    }
+
+    /**
+     * Should debug CURL Or not
+     * @return bool
+     */
+    private function curlDebug()
+    {
+        return (isset($this->db['debugCURL']) && $this->db['debugCURL'] == 1);
 
     }
 
@@ -197,19 +229,6 @@ class API
         }
         return array('X-CSRF-Token: ' . $this->csrfToken);
 
-    }
-
-    /**
-     * Set base URL for all future CURL calls
-     */
-    private function setBaseUrl()
-    {
-        $db = get_option(WPOP_OPTION_NAME);
-
-        if (!empty($db) && isset($db['baseURL'])) {
-            //notice: append a slash at end
-            $this->baseURL = $db['baseURL'] . '/';
-        }
     }
 
 

@@ -4,11 +4,9 @@
     var requestedTab = window.location.hash.replace('#top#', '');
 
     jQuery(function ($) {
-        /**
-         * Cache DOM elements for later use
-         */
+        //Cache DOM elements for later use
         var $gaTabs = $('h2#op-tabs'),
-            $input = $("form#wpop_form").find('input:hidden[name="_wp_http_referer"]'),
+            $input = $("form#op-form").find('input:hidden[name="_wp_http_referer"]'),
             $sections = $('section.tab-content');
 
         //If there no active tab found , set first tab as active
@@ -19,7 +17,7 @@
         setRedirectURL(requestedTab);
 
         //Bind a click event to all tabs
-        $gaTabs.find('a.nav-tab').on('click', (function (e) {
+        $gaTabs.find('a.nav-tab').on('click.op', (function (e) {
             e.stopPropagation();
             //Hide all tabs
             $gaTabs.find('a.nav-tab').removeClass('nav-tab-active');

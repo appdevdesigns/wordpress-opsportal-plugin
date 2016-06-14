@@ -8,7 +8,7 @@
            href="#top#op-troubleshoot"><?php _e('Troubleshoot', WPOP_TEXT_DOMAIN) ?></a>
     </h2>
 
-    <form action="<?php echo admin_url('options.php') ?>" method="post" id="wpop_form" novalidate>
+    <form action="<?php echo admin_url('options.php') ?>" method="post" id="op-form" novalidate>
         <?php
         settings_fields(self::WPOP_OPTION_GROUP);
         ?>

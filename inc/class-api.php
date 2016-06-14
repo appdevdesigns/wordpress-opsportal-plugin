@@ -186,7 +186,7 @@ class API
     public function getThemesList($cached = true)
     {
         if ($cached == true) {
-            $saved = get_transient('ops_portal_themesList');
+            $saved = get_transient(self::transientsPrefix . 'themesList');
             if (!empty($saved)) {
                 return $saved;
             }
@@ -200,7 +200,7 @@ class API
             false
         );
 
-        $this->checkAndSetTransient('ops_portal_themesList', $response);
+        $this->checkAndSetTransient(self::transientsPrefix . 'themesList', $response);
         return $response;
     }
 

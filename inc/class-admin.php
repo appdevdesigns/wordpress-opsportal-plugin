@@ -47,7 +47,6 @@ class Admin
             array($this->settings, 'load_options_page'));
 
         add_action('admin_print_scripts-' . $page_hook_suffix, array($this, 'add_admin_assets'));
-        add_action("load-$page_hook_suffix", array($this->settings, 'add_admin_notice'));
     }
 
 

@@ -7,6 +7,7 @@ namespace ITH\Plugins\WP_Ops_Portal;
 class Settings
 {
     const WPOP_OPTION_GROUP = 'ops_portal_options';
+    const PLUGIN_SLUG = 'ops_portal';
 
     private $api;
 
@@ -20,6 +21,8 @@ class Settings
 
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
+
+        add_action('admin_notices', array($this, 'add_admin_notice'));
 
         $this->api = new API();
     }
@@ -285,8 +288,8 @@ class Settings
      */
     public function add_admin_notice()
     {
+        if (!$this->is_ops_screen()) return;
         $db = $this->get_safe_options();
-
         //If base URL not set return early
         if (empty($db) || empty($db['baseURL'])) return;
 
@@ -294,12 +297,22 @@ class Settings
         if (empty($response) || $response['http_code'] != 200):
             ?>
             <div class="notice notice-error is-dismissible">
-                <p><?php _e('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN) ?>:
-                    <b><?php echo $response['http_code']; ?></b>
-                </p>
+                <p><b><?php _e('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN);
+                        echo ': '.$response['http_code']; ?> </b></p>
             </div>
             <?php
         endif;
+    }
+
+    /**
+     * Check if user on settings page
+     * @return bool
+     */
+    private function is_ops_screen()
+    {
+        $screen = get_current_screen();
+        return ($screen->id == "settings_page_" . self::PLUGIN_SLUG);
+
     }
 
 }

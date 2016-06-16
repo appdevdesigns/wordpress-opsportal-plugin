@@ -16,8 +16,8 @@ class Shortcode
     }
 
     /**
-     * Process short-code and outputs html 
-     * 
+     * Process short-code and outputs html
+     *
      * @todo output valid html, prefix 'data' on custom attribute
      * @return mixed
      */
@@ -27,23 +27,11 @@ class Shortcode
         $db = get_option(WPOP_OPTION_NAME);
         $theme = empty($db['defaultTheme']) ? '' : esc_attr($db['defaultTheme']);
 
-        if (!empty($db['baseURL'])) {
-            ?> <!-- ==== Ops Portal Start ==== -->
-            <div appdev-opsportal="default" portal-theme="<?php echo $theme ?>"></div>
-            <script
-                async="async"
-                defer="defer"
-                type="text/javascript"
-                src="<?php echo esc_url($db['baseURL']) ?>/steal/steal.js?OpsPortal&ver=<?php echo urlencode(WPOP_PLUGIN_VER) ?>"
-                config="<?php echo esc_url($db['baseURL']) ?>/stealconfig.js">
-            </script>
-            <!-- ==== Ops Portal Ends ==== -->
-            <?php
-        } else {
-            ?>
-            <!-- Ops Portal not configured properly -->
-            <?php
-        }
+        Util::load_view('short-code', array(
+            'theme' => $theme,
+            'base_url' => $db['baseURL']
+        ));
+        
         return ob_get_clean();
     }
 }

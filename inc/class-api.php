@@ -121,6 +121,7 @@ class API
 
     /**
      * Get a list of roles available
+     * @todo DRY
      *
      * @GET
      * @param $cached bool Check for saved response first

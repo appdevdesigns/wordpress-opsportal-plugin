@@ -31,8 +31,7 @@ spl_autoload_register(__NAMESPACE__ . '\ops_class_autoloader');
 
 /**
  * Auto-loader for our plugin classes
- * @param $class_name
- * @throws \Exception
+ * @param $class_name string
  */
 function ops_class_autoloader($class_name)
 {

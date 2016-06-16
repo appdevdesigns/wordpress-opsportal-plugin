@@ -58,6 +58,7 @@ class Settings
 
     /**
      * If you has updated the plugin this will update the database
+     * Runs after 'plugins_loaded' hook
      */
     public function maybe_upgrade()
     {
@@ -122,20 +123,16 @@ class Settings
 
         //The data you want to pass on view
         $view = array(
+            'option_group' => self::WPOP_OPTION_GROUP,
             'db' => $this->get_safe_options(),
             'roles' => $this->get_roles_array(),
             'scopes' => $this->get_scopes_array(),
             'themes' => $this->get_themes_array(),
-            'curl_response' => $this->read_log_file('curl_response.log'),
-            'curl_stderr' => $this->read_log_file('curl_stderr.log'),
+            'curl_response' => Util::read_log_file('curl_response.log'),
+            'curl_stderr' => Util::read_log_file('curl_stderr.log'),
         );
-        //WordPress discourage this function
-        //Make array keys available as variables to view template
-        extract($view);
-        unset($view);
 
-        require plugin_dir_path(WPOP_BASE_FILE) . '/views/options-page.php';
-
+        Util::load_view('options-page', $view);
     }
 
     /**
@@ -164,28 +161,6 @@ class Settings
 
     }
 
-    /**
-     * Read file content from logs directory
-     * @param $file string file name
-     * @return string
-     */
-    private function read_log_file($file)
-    {
-        $log_dir = dirname(dirname(__FILE__)) . '/logs/';
-        $file_path = $log_dir . sanitize_file_name($file);
-
-        if (is_readable($file_path)) {
-            $contents = file_get_contents($file_path);
-            if (trim($contents) === '') {
-                return __('File is empty', WPOP_TEXT_DOMAIN);
-            } else {
-                return $contents;
-            }
-        }
-
-        return $file . ' ' . __('not readable or not found', WPOP_TEXT_DOMAIN);
-
-    }
 
     /**
      * The available roles array
@@ -247,42 +222,6 @@ class Settings
     }
 
     /**
-     * Get WordPress' current language code
-     * @param bool $short Return short version like 'en' when true
-     * @return mixed
-     */
-    private function get_wp_lang_code($short = true)
-    {
-        $code = get_bloginfo('language');
-        if ($short == true) {
-            return substr($code, 0, 2);
-        }
-        return $code;
-
-    }
-
-    /**
-     * Search for current wp locale in given array; if not found return first
-     * @param $translations array
-     * @return string localized label
-     */
-    private function get_localized_label($translations)
-    {
-        $locale = $this->get_wp_lang_code(true);
-        $found = array_filter($translations, function ($item) use ($locale) {
-            return ($item['language_code'] === $locale);
-        });
-        if (!empty($found) && count($found)) {
-            //array_filter may return array of array, but we want only first item in array
-            $found = current($found);
-            return $found['role_label'];
-        } else {
-            return $translations[0]['role_label'];
-        }
-
-    }
-
-    /**
      * Check if Ops Portal is up and running
      * Show a error notice when response code is not 200
      */
@@ -295,12 +234,11 @@ class Settings
 
         $response = $this->api->callHome();
         if (empty($response) || $response['http_code'] != 200):
-            ?>
-            <div class="notice notice-error is-dismissible">
-                <p><b><?php _e('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN);
-                        echo ': '.$response['http_code']; ?> </b></p>
-            </div>
-            <?php
+            Util::load_view('admin-notice', array(
+                    'type' => 'error',
+                    'message' => __('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN) . ': ' . $response['http_code']
+                )
+            );
         endif;
     }
 

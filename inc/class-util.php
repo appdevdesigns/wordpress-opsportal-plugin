@@ -1,0 +1,92 @@
+<?php
+namespace ITH\Plugins\WP_Ops_Portal;
+/**
+ * Class Util
+ * @package ITH\Plugins\WP_Ops_Portal
+ */
+class Util
+{
+    function __construct()
+    {
+        //
+    }
+
+    /**
+     * Load a view
+     * @param $file string php File name without extension
+     * @param $vars array Variables to pass to view
+     */
+    public static function load_view($file, $vars = array())
+    {
+        $file_path = plugin_dir_path(WPOP_BASE_FILE) . 'views/' . sanitize_file_name($file) . '.php';
+        if (is_readable($file_path)) {
+            //WordPress discourage 'extract' function
+            //Make array keys available as variables to view template
+            extract($vars);
+            unset($vars);
+            require $file_path;
+        } else {
+            trigger_error(sprintf(__('Error locating view file %s for inclusion', WPOP_TEXT_DOMAIN), esc_html($file_path)), E_USER_ERROR);
+        }
+
+    }
+
+    /**
+     * Get WordPress' current language code
+     * @param bool $short Return short version like 'en' when true
+     * @return mixed
+     */
+    public static function get_wp_lang_code($short = true)
+    {
+        $code = get_bloginfo('language');
+        if ($short == true) {
+            return substr($code, 0, 2);
+        }
+        return $code;
+
+    }
+
+    /**
+     * Search for current wp locale in given array; if not found return first
+     * @param $translations array
+     * @return string localized label
+     */
+    public static function get_localized_label($translations)
+    {
+        $locale = self::get_wp_lang_code(true);
+        $found = array_filter($translations, function ($item) use ($locale) {
+            return ($item['language_code'] === $locale);
+        });
+        if (!empty($found) && count($found)) {
+            //array_filter may return array of array, but we want only first item in array
+            $found = current($found);
+            return $found['role_label'];
+        } else {
+            return $translations[0]['role_label'];
+        }
+
+    }
+
+    /**
+     * Read file content from logs directory
+     * @param $file string file name
+     * @return string
+     */
+    public static function read_log_file($file)
+    {
+        $log_dir = dirname(dirname(__FILE__)) . '/logs/';
+        $file_path = $log_dir . sanitize_file_name($file);
+
+        if (is_readable($file_path)) {
+            $contents = file_get_contents($file_path);
+            if (trim($contents) === '') {
+                return __('File is empty', WPOP_TEXT_DOMAIN);
+            } else {
+                return $contents;
+            }
+        }
+
+        return $file . ' ' . __('not readable or not found', WPOP_TEXT_DOMAIN);
+
+    }
+}

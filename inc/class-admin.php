@@ -26,8 +26,8 @@ class Admin
         // Be multilingual
         add_action('plugins_loaded', array($this, 'do_upon_plugins_loaded'));
 
+        //Init required classes
         $this->settings = new Settings();
-        //Init user list table
         new User_List_Table();
 
     }

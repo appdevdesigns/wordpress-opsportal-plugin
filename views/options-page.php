@@ -10,7 +10,7 @@
 
     <form action="<?php echo admin_url('options.php') ?>" method="post" id="op-form" novalidate>
         <?php
-        settings_fields(self::WPOP_OPTION_GROUP);
+        settings_fields($option_group);
         ?>
         <div class="tab-wrapper">
             <section id="op-general" class="tab-content">
@@ -30,7 +30,7 @@
                                 <option disabled value=""><?php _e('Select a Role', WPOP_TEXT_DOMAIN); ?></option>
                                 <?php
                                 foreach ($roles as $role) {
-                                    echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . $this->get_localized_label($role['translations']) . '</option>';
+                                    echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . self::get_localized_label($role['translations']) . '</option>';
                                 }
                                 ?>
                             </select>

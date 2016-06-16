@@ -4,10 +4,10 @@
 
 
 ### Prerequisite
-* php v5.3.0 or v7.0.x
+* php v5.3.0+ or v7.0.x
 * WordPress v4.0 or above
 * php CURL Extension
-* Running instance of Ops Portal
+* A running instance of Ops Portal
 
 ### Setup this project on localhost
 * **Install [WordPress](https://roots.io/bedrock/)**
@@ -20,7 +20,7 @@ cd wordpress
 cp .env.example .env
 nano .env
 ```
-* Create a virtual host ```wp-test.local``` that points to ```web``` folder
+* Create a virtual host named ```wp-test.local``` that points to ```wordpress/web``` folder
 * Install WordPress via [WP CLI](https://wp-cli.org/commands/core/install/)
 ```
 wp core install --url='http://wp-test.local' --title='WP Test' --admin_user='admin' --admin_password='admin' --admin_email='admin@wp.local' --skip-email

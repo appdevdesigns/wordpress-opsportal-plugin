@@ -9,12 +9,11 @@ namespace ITH\Plugins\WP_Ops_Portal;
  */
 class User_List_Table
 {
-    //User_Sync class instance
-    private $sync;
+
 
     function __construct()
     {
-        add_filter('manage_users_columns', array($this, 'add_new_column'));
+        add_filter('manage_users_columns', array($this, 'add_new_columns'));
         add_action('manage_users_custom_column', array($this, 'show_column_value'), 10, 3);
 
         //http://wordpress.stackexchange.com/questions/121632/add-a-button-to-users-php
@@ -28,7 +27,7 @@ class User_List_Table
      * @param $columns array
      * @return mixed
      */
-    function add_new_column($columns)
+    function add_new_columns($columns)
     {
         $columns['op_synced'] = 'Synced';
         $columns['op_user_id'] = 'Ops Portal ID';
@@ -61,6 +60,7 @@ class User_List_Table
     {
         if (!$this->is_user_screen())
             return;
+        //Is it good practice to put js inside a php file ?
         ?>
         <script type="text/javascript">
             jQuery(function ($) {
@@ -78,9 +78,9 @@ class User_List_Table
         if (isset($_GET['action']) && $_GET['action'] === 'op_bulk_sync' && isset($_GET['users'])) {
             $selected_users = $_GET['users'];
 
-            $this->sync = new User_Sync();
-            $this->sync->create_bulk_users($selected_users);
-            //It is required to redirect user to same page, this will remove any query string from page, prevent re-submission
+            $sync = new User_Sync();
+            $sync->create_bulk_users($selected_users);
+            //It is necessary to redirect user to same page, this will remove any query string from page, prevent re-submission
             $paged = (isset($_GET['paged'])) ? '&paged=' . intval($_GET['paged']) : '';
             wp_redirect(admin_url('/users.php?op_synced=1' . $paged), 301);
             exit;
@@ -94,9 +94,12 @@ class User_List_Table
     function add_admin_notice()
     {
         if ($this->is_user_screen() && isset($_GET['op_synced'])) {
-            echo '<div class="updated notice notice-success is-dismissible"><p><b>' . __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN) . '</b></p></div>';
+            Util::load_view('admin-notice', array(
+                    'type' => 'success',
+                    'message' => __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN)
+                )
+            );
         }
-
     }
 
     /**

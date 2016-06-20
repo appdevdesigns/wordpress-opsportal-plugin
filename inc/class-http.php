@@ -38,7 +38,7 @@ class Http
     /**
      * Function to instantiate our class and make it a singleton
      */
-    public static function get_instance()
+    public static function instance()
     {
         $cls = get_called_class();
         if (!isset(self::$instances[$cls])) {

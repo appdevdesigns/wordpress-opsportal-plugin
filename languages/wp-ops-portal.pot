@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ops Portal\n"
-"POT-Creation-Date: 2016-06-10 14:27+0530\n"
+"POT-Creation-Date: 2016-06-20 14:27+0530\n"
 "PO-Revision-Date: 2016-06-07 11:17+0530\n"
 "Last-Translator: \n"
 "Language-Team: ITHands\n"
@@ -21,39 +21,39 @@ msgstr ""
 "X-Poedit-SearchPath-1: inc\n"
 "X-Poedit-SearchPathExcluded-0: logs\n"
 
-#: inc/class-admin.php:65
+#: inc/class-admin.php:66
 msgid "Settings"
 msgstr ""
 
-#: inc/class-http.php:27
+#: inc/class-http.php:30
 msgid "CURL is not installed, Ops Portal Plugin requires CURL pre-installed"
 msgstr ""
 
-#: inc/class-settings.php:115
+#: inc/class-settings.php:124
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/class-settings.php:174
-msgid "File is empty"
+#: inc/class-settings.php:164
+msgid "Base URL was not a valid URL."
 msgstr ""
 
-#: inc/class-settings.php:180
-msgid "not readable or not found"
-msgstr ""
-
-#: inc/class-settings.php:222
+#: inc/class-settings.php:216
 msgid "Default"
 msgstr ""
 
-#: inc/class-user-list-table.php:49
+#: inc/class-settings.php:256
+msgid "Failed to connect to Ops Postal. Server response code"
+msgstr ""
+
+#: inc/class-user-list-table.php:48
 msgid "Yes"
 msgstr ""
 
-#: inc/class-user-list-table.php:49
+#: inc/class-user-list-table.php:48
 msgid "No"
 msgstr ""
 
-#: inc/class-user-list-table.php:52
+#: inc/class-user-list-table.php:51
 msgid "NA"
 msgstr ""
 
@@ -61,8 +61,21 @@ msgstr ""
 msgid "Sync to Ops Portal"
 msgstr ""
 
-#: inc/class-user-list-table.php:97
+#: inc/class-user-list-table.php:99
 msgid "Bulk User Sync Finished !"
+msgstr ""
+
+#: inc/class-util.php:29
+#, php-format
+msgid "Error locating view file %s for inclusion"
+msgstr ""
+
+#: inc/class-util.php:83
+msgid "File is empty"
+msgstr ""
+
+#: inc/class-util.php:89
+msgid "not readable or not found"
 msgstr ""
 
 #: views/options-page.php:2
@@ -105,26 +118,42 @@ msgstr ""
 msgid "Default theme"
 msgstr ""
 
-#: views/options-page.php:79
+#: views/options-page.php:75
+msgid "Use colors"
+msgstr ""
+
+#: views/options-page.php:77
+msgid "Use colors below"
+msgstr ""
+
+#: views/options-page.php:82
+msgid "Customize theme"
+msgstr ""
+
+#: views/options-page.php:100
+msgid "Custom CSS code"
+msgstr ""
+
+#: views/options-page.php:110
 msgid "Debug CURL"
 msgstr ""
 
-#: views/options-page.php:81
+#: views/options-page.php:112
 msgid "Log CURL calls"
 msgstr ""
 
-#: views/options-page.php:83
+#: views/options-page.php:114
 msgid "This should only be used temporarily or during development"
 msgstr ""
 
-#: views/options-page.php:87
+#: views/options-page.php:118
 msgid "Last CURL response"
 msgstr ""
 
-#: views/options-page.php:93
+#: views/options-page.php:124
 msgid "Last CURL stderr log"
 msgstr ""
 
-#: views/options-page.php:99
+#: views/options-page.php:130
 msgid "Database options dump"
 msgstr ""

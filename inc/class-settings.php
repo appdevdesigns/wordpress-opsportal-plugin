@@ -152,7 +152,15 @@ class Settings
     {
         $out = array();
         $out['pluginVer'] = WPOP_PLUGIN_VER; //always save plugin version to db
-        $out['baseURL'] = rtrim(sanitize_text_field($in['baseURL']), '/');
+
+        //check for valid url
+        if (filter_var(trim($in['baseURL']), FILTER_VALIDATE_URL) === false) {
+            $out['baseURL'] = '';
+            add_settings_error(WPOP_OPTION_NAME, 'baseURL', __('Base URL was not a valid URL.', WPOP_TEXT_DOMAIN));
+        } else {
+            $out['baseURL'] = trailingslashit(sanitize_text_field($in['baseURL']));
+        }
+
         $out['debugCURL'] = isset($in['debugCURL']);
         $out['defaultRole'] = intval($in['defaultRole']);
         $out['defaultScopes'] = (array)$in['defaultScopes'];

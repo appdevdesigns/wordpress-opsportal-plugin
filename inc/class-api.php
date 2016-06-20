@@ -11,7 +11,7 @@ class API
 {
 
     //Base URL of Ops-Portal node-js instance
-    //Note:: baseURL will contains a trailing slash
+    //Note:: baseURL should be contain a trailing slash
     private $baseURL = '';
 
     //CSRF Token to send with all requests
@@ -36,9 +36,8 @@ class API
         $this->baseURL = $this->getBaseUrl();
 
         //HTTP Class instance
-        $this->http = Http::get_instance();
+        $this->http = Http::instance();
         $this->http->setDebug($this->curlDebug());
-
 
     }
 
@@ -48,11 +47,7 @@ class API
      */
     private function getBaseUrl()
     {
-        if (!empty($this->db) && isset($this->db['baseURL'])) {
-            //notice: append a slash at end
-            return $this->db['baseURL'] . '/';
-        }
-        return '';
+        return (!empty($this->db) && isset($this->db['baseURL'])) ? $this->db['baseURL'] : '';
     }
 
     /**

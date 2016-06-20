@@ -35,10 +35,7 @@ class User_Sync
     {
         //https://codex.wordpress.org/Function_Reference/get_userdata
         $user = get_userdata($user_id);
-        $response = $this->api->createUser($this->build_create_user_request($user));
-        $this->add_user_meta($user_id, $response);
-        $this->set_user_role_and_scopes($response);
-        return $response;
+        return $this->send_create_user_call($user, $user_id);
 
     }
 
@@ -49,15 +46,26 @@ class User_Sync
     public function create_bulk_users($user_ids)
     {
         $user_ids = array_unique($user_ids);
-        $users = $this->get_not_synced_users($user_ids);
+        $users = Util::get_not_synced_users($user_ids);
 
         foreach ($users as $user) {
-            $response = $this->api->createUser($this->build_create_user_request($user));
-            $this->add_user_meta($user->ID, $response);
-            $this->set_user_role_and_scopes($response);
-
+            $this->send_create_user_call($user, $user->ID);
         }
 
+    }
+
+    /**
+     * The actual function that send payload to create user endpoint
+     * @param $user array
+     * @param $user_id int
+     * @return array Server response
+     */
+    public function send_create_user_call($user, $user_id)
+    {
+        $response = $this->api->createUser($this->build_create_user_request($user));
+        $this->add_user_meta($user_id, $response);
+        $this->set_user_role_and_scopes($response);
+        return $response;
     }
 
     /** Create the request body for create user request
@@ -113,28 +121,6 @@ class User_Sync
             update_user_meta($user_id, 'op_user_id', $response['data']['id']);
         }
         update_user_meta($user_id, 'op_synced', $op_synced);
-    }
-
-    /**
-     * Get a list of user those are not synced yet
-     * @param $count bool Should return number of rows found or not
-     * @param $user_ids array Users ids
-     * @return mixed
-     */
-    public function get_not_synced_users($user_ids = array(), $count = false)
-    {
-        $args = array(
-            'fields' => array('ID', 'user_login', 'user_email'),
-            'meta_key' => 'op_synced', 'meta_value' => 0
-        );
-
-        if (count($user_ids)) {
-            $args['include'] = (array)$user_ids;
-        }
-        //https://codex.wordpress.org/Class_Reference/WP_User_Query
-        $users = new \WP_User_Query($args);
-        return ($count) ? $users->get_total() : $users->get_results();
-
     }
 
     /**

@@ -67,3 +67,11 @@ if (is_admin() && (!defined('DOING_AJAX') || !DOING_AJAX)) {
 //These classes be available for both wp-admin and public
 new User_Sync();
 new User_Login();
+
+//CLI class to be called by wp-cli command line
+//http://wp-cli.org/docs/commands-cookbook/
+if (defined('WP_CLI') && WP_CLI) {
+    \WP_CLI::add_command('opsportal', __NAMESPACE__ . '\CLI');
+}
+
+

@@ -27,7 +27,7 @@ class User_List_Table
      * @param $columns array
      * @return mixed
      */
-    function add_new_columns($columns)
+    public function add_new_columns($columns)
     {
         $columns['op_synced'] = 'Synced';
         $columns['op_user_id'] = 'Ops Portal ID';
@@ -41,7 +41,7 @@ class User_List_Table
      * @param $user_id
      * @return string
      */
-    function show_column_value($value, $column_id, $user_id)
+    public function show_column_value($value, $column_id, $user_id)
     {
         $user = get_userdata($user_id);
         if ('op_synced' == $column_id)
@@ -56,7 +56,7 @@ class User_List_Table
     /**
      * Add a option in bulk user select option box via javascript
      */
-    function add_sync_option()
+    public function add_sync_option()
     {
         if (!$this->is_user_screen())
             return;
@@ -73,7 +73,7 @@ class User_List_Table
     /**
      * Perform bulk use sync when requested
      */
-    function do_bulk_user_sync()
+    public function do_bulk_user_sync()
     {
         if (isset($_GET['action']) && $_GET['action'] === 'op_bulk_sync' && isset($_GET['users'])) {
             $selected_users = $_GET['users'];
@@ -91,7 +91,7 @@ class User_List_Table
     /**
      * Add admin notice when bulk action is finished
      */
-    function add_admin_notice()
+    public function add_admin_notice()
     {
         if ($this->is_user_screen() && isset($_GET['op_synced'])) {
             Util::load_view('admin-notice', array(

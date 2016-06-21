@@ -29,7 +29,7 @@ class Shortcode
 
         Util::load_view('short-code', array(
             'theme' => $theme,
-            'base_url' => $db['baseURL']
+            'base_url' => $db['baseURL'] //baseURL contains a slash at end
         ));
         
         return ob_get_clean();

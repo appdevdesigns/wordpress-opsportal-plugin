@@ -1,5 +1,5 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /*
 Plugin Name: WP Ops Portal
@@ -27,13 +27,13 @@ define('WPOP_TEXT_DOMAIN', 'wp-ops-portal');
  * Registering class auto-loader
  * @requires php v5.3.0
  */
-spl_autoload_register(__NAMESPACE__ . '\ops_class_autoloader');
+spl_autoload_register(__NAMESPACE__ . '\op_class_autoloader');
 
 /**
  * Auto-loader for our plugin classes
  * @param $class_name string
  */
-function ops_class_autoloader($class_name)
+function op_class_autoloader($class_name)
 {
     //Make sure this loader work only for this plugin's related classes
     if (false !== strpos($class_name, __NAMESPACE__)) {

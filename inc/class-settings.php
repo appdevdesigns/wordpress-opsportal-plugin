@@ -1,8 +1,8 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 /**
  * Class Settings
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class Settings
 {
@@ -244,7 +244,7 @@ class Settings
         if (empty($response) || $response['http_code'] != 200):
             Util::load_view('admin-notice', array(
                     'type' => 'error',
-                    'message' => __('Failed to connect to Ops Postal. Server response code', WPOP_TEXT_DOMAIN) . ': ' . $response['http_code']
+                    'message' => __('Failed to connect to Ops Portal. Server response code', WPOP_TEXT_DOMAIN) . ': ' . $response['http_code']
                 )
             );
         endif;

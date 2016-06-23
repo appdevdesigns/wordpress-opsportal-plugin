@@ -1,11 +1,11 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /**
  * Class Shortcode
  *
  * Register and process short-code on front-end
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class Shortcode
 {

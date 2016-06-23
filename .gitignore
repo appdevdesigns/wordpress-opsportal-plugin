@@ -56,6 +56,9 @@ $RECYCLE.BIN/
 /vendor/
 composer.phar
 
+# wp cli
+wp-cli.phar
+
 # project related
 /logs/*
 !logs/.htaccess

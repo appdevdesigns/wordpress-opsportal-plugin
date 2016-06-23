@@ -1,11 +1,11 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /**
  * Class User_List_Table
  *
  * This class is responsible for modification in WordPress inbuilt user list table 'wp-admin/users.php'
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class User_List_Table
 {

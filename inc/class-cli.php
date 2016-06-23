@@ -1,5 +1,5 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 use WP_CLI;
 
@@ -8,7 +8,7 @@ use WP_CLI;
  *
  * @require WP CLI Version 0.24
  * @link https://wp-cli.org/
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class CLI
 {

@@ -1,9 +1,9 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /**
  * Class Admin
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class Admin
 {

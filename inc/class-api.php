@@ -1,11 +1,11 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /**
  * Class API
  *
  * Main class that interacts with Ops Portal APIs with help of Http class
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class API
 {

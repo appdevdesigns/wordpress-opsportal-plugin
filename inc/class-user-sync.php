@@ -1,11 +1,11 @@
 <?php
-namespace ITH\Plugins\WP_Ops_Portal;
+namespace AppDev\Plugins\WP_Ops_Portal;
 
 /**
  * Class User_Sync
  *
  * Hook WordPress to sync WP Users to Ops Portal
- * @package ITH\Plugins\WP_Ops_Portal
+ * @package AppDev\Plugins\WP_Ops_Portal
  */
 class User_Sync
 {

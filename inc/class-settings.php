@@ -161,6 +161,14 @@ class Settings
             $out['baseURL'] = trailingslashit(sanitize_text_field($in['baseURL']));
         }
 
+        if (empty($in['defaultScopes'])) {
+            add_settings_error(WPOP_OPTION_NAME, 'defaultScopes', __('At-least one scope should be selected.', WPOP_TEXT_DOMAIN));
+        }
+
+        if (empty($in['defaultRole'])) {
+            add_settings_error(WPOP_OPTION_NAME, 'defaultRole', __('A role should be selected.', WPOP_TEXT_DOMAIN));
+        }
+
         $out['debugCURL'] = isset($in['debugCURL']);
         $out['defaultRole'] = intval($in['defaultRole']);
         $out['defaultScopes'] = (array)$in['defaultScopes'];

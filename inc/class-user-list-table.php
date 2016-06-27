@@ -63,9 +63,15 @@ class User_List_Table
         //Is it good practice to put js inside a php file ?
         ?>
         <script type="text/javascript">
-            jQuery(function ($) {
-                $('<option>').val('op_bulk_sync').text('<?php _e('Sync to Ops Portal', WPOP_TEXT_DOMAIN) ?>').appendTo("select#bulk-action-selector-top");
-            });
+            (function (doc) {
+                'use strict';
+                doc.addEventListener('DOMContentLoaded', function (event) {
+                    var op = doc.createElement('option');
+                    op.value = 'op_bulk_sync';
+                    op.text = '<?php _e('Sync to Ops Portal', WPOP_TEXT_DOMAIN) ?>';
+                    doc.querySelector('#bulk-action-selector-top').appendChild(op);
+                });
+            })(document);
         </script>
         <?php
     }

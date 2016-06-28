@@ -26,7 +26,7 @@ class Util
             unset($vars);
             require $file_path;
         } else {
-            trigger_error(sprintf(__('Error locating view file %s for inclusion', WPOP_TEXT_DOMAIN), esc_html($file_path)), E_USER_ERROR);
+            trigger_error(sprintf(__('Error locating view file %s for inclusion', 'ops-portal'), esc_html($file_path)), E_USER_ERROR);
         }
 
     }
@@ -80,13 +80,13 @@ class Util
         if (is_readable($file_path)) {
             $contents = file_get_contents($file_path);
             if (trim($contents) === '') {
-                return __('File is empty', WPOP_TEXT_DOMAIN);
+                return __('File is empty', 'ops-portal');
             } else {
                 return $contents;
             }
         }
 
-        return $file . ' ' . __('not readable or not found', WPOP_TEXT_DOMAIN);
+        return $file . ' ' . __('not readable or not found', 'ops-portal');
 
     }
 

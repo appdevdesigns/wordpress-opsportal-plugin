@@ -156,17 +156,17 @@ class Settings
         //check for valid url
         if (filter_var(trim($in['baseURL']), FILTER_VALIDATE_URL) === false) {
             $out['baseURL'] = '';
-            add_settings_error(WPOP_OPTION_NAME, 'baseURL', __('Base URL was not a valid URL.', WPOP_TEXT_DOMAIN));
+            add_settings_error(WPOP_OPTION_NAME, 'baseURL', __('Base URL was not a valid URL.', 'ops-portal'));
         } else {
             $out['baseURL'] = trailingslashit(sanitize_text_field($in['baseURL']));
         }
 
         if (empty($in['defaultScopes'])) {
-            add_settings_error(WPOP_OPTION_NAME, 'defaultScopes', __('At-least one scope should be selected.', WPOP_TEXT_DOMAIN));
+            add_settings_error(WPOP_OPTION_NAME, 'defaultScopes', __('At-least one scope should be selected.', 'ops-portal'));
         }
 
         if (empty($in['defaultRole'])) {
-            add_settings_error(WPOP_OPTION_NAME, 'defaultRole', __('A role should be selected.', WPOP_TEXT_DOMAIN));
+            add_settings_error(WPOP_OPTION_NAME, 'defaultRole', __('A role should be selected.', 'ops-portal'));
         }
 
         $out['debugCURL'] = isset($in['debugCURL']);
@@ -213,7 +213,7 @@ class Settings
         //default theme does not exist
         $themes[] = array(
             'path' => 0,
-            'name' => __('Default', WPOP_TEXT_DOMAIN)
+            'name' => __('Default', 'ops-portal')
         );
 
         $data = $this->check_and_return_response($response);
@@ -252,7 +252,7 @@ class Settings
         if (empty($response) || $response['http_code'] != 200):
             Util::load_view('admin-notice', array(
                     'type' => 'error',
-                    'message' => __('Failed to connect to Ops Portal. Server response code', WPOP_TEXT_DOMAIN) . ': ' . $response['http_code']
+                    'message' => __('Failed to connect to Ops Portal. Server response code', 'ops-portal') . ': ' . $response['http_code']
                 )
             );
         endif;

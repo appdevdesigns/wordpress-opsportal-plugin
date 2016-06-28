@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ops Portal\n"
-"POT-Creation-Date: 2016-06-20 14:27+0530\n"
+"POT-Creation-Date: 2016-06-28 17:17+0530\n"
 "PO-Revision-Date: 2016-06-07 11:17+0530\n"
 "Last-Translator: \n"
 "Language-Team: ITHands\n"
@@ -29,20 +29,28 @@ msgstr ""
 msgid "CURL is not installed, Ops Portal Plugin requires CURL pre-installed"
 msgstr ""
 
-#: inc/class-settings.php:124
+#: inc/class-settings.php:121
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/class-settings.php:164
+#: inc/class-settings.php:159
 msgid "Base URL was not a valid URL."
+msgstr ""
+
+#: inc/class-settings.php:165
+msgid "At-least one scope should be selected."
+msgstr ""
+
+#: inc/class-settings.php:169
+msgid "A role should be selected."
 msgstr ""
 
 #: inc/class-settings.php:216
 msgid "Default"
 msgstr ""
 
-#: inc/class-settings.php:256
-msgid "Failed to connect to Ops Postal. Server response code"
+#: inc/class-settings.php:255
+msgid "Failed to connect to Ops Portal. Server response code"
 msgstr ""
 
 #: inc/class-user-list-table.php:48
@@ -57,11 +65,11 @@ msgstr ""
 msgid "NA"
 msgstr ""
 
-#: inc/class-user-list-table.php:67
+#: inc/class-user-list-table.php:71
 msgid "Sync to Ops Portal"
 msgstr ""
 
-#: inc/class-user-list-table.php:99
+#: inc/class-user-list-table.php:105
 msgid "Bulk User Sync Finished !"
 msgstr ""
 
@@ -118,42 +126,26 @@ msgstr ""
 msgid "Default theme"
 msgstr ""
 
-#: views/options-page.php:75
-msgid "Use colors"
-msgstr ""
-
-#: views/options-page.php:77
-msgid "Use colors below"
-msgstr ""
-
-#: views/options-page.php:82
-msgid "Customize theme"
-msgstr ""
-
-#: views/options-page.php:100
-msgid "Custom CSS code"
-msgstr ""
-
-#: views/options-page.php:110
+#: views/options-page.php:79
 msgid "Debug CURL"
 msgstr ""
 
-#: views/options-page.php:112
+#: views/options-page.php:81
 msgid "Log CURL calls"
 msgstr ""
 
-#: views/options-page.php:114
+#: views/options-page.php:83
 msgid "This should only be used temporarily or during development"
 msgstr ""
 
-#: views/options-page.php:118
+#: views/options-page.php:87
 msgid "Last CURL response"
 msgstr ""
 
-#: views/options-page.php:124
+#: views/options-page.php:93
 msgid "Last CURL stderr log"
 msgstr ""
 
-#: views/options-page.php:130
+#: views/options-page.php:99
 msgid "Database options dump"
 msgstr ""

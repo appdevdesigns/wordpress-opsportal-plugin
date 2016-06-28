@@ -48,7 +48,7 @@ class User_List_Table
             return ($user->op_synced == 1) ? '<span style="color: #00a000">' . __('Yes') . '</span>' : '<span style="color: #ac0404">' . __('No') . '</span>';
 
         if ('op_user_id' == $column_id)
-            return (empty($user->op_user_id)) ? __('NA', WPOP_TEXT_DOMAIN) : $user->op_user_id;
+            return (empty($user->op_user_id)) ? __('NA', 'ops-portal') : $user->op_user_id;
 
         return $value;
     }
@@ -68,7 +68,7 @@ class User_List_Table
                 doc.addEventListener('DOMContentLoaded', function (event) {
                     var op = doc.createElement('option');
                     op.value = 'op_bulk_sync';
-                    op.text = '<?php _e('Sync to Ops Portal', WPOP_TEXT_DOMAIN) ?>';
+                    op.text = '<?php _e('Sync to Ops Portal', 'ops-portal') ?>';
                     doc.querySelector('#bulk-action-selector-top').appendChild(op);
                 });
             })(document);
@@ -102,7 +102,7 @@ class User_List_Table
         if ($this->is_user_screen() && isset($_GET['op_synced'])) {
             Util::load_view('admin-notice', array(
                     'type' => 'success',
-                    'message' => __('Bulk User Sync Finished !', WPOP_TEXT_DOMAIN)
+                    'message' => __('Bulk User Sync Finished !', 'ops-portal')
                 )
             );
         }

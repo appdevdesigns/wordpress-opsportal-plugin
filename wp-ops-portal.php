@@ -10,7 +10,7 @@ Author: ITHands
 Author URI: http://ithands.com
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wp-ops-portal
+Text Domain: ops-portal
 Domain Path: /languages
 */
 ?><?php
@@ -20,8 +20,6 @@ if (!defined('ABSPATH')) die('Are you serious ?');
 define('WPOP_PLUGIN_VER', '1.0.0');
 define('WPOP_BASE_FILE', __FILE__);
 define('WPOP_OPTION_NAME', 'ops_portal_options');
-define('WPOP_TEXT_DOMAIN', 'wp-ops-portal');
-
 
 /**
  * Registering class auto-loader
@@ -47,7 +45,7 @@ function op_class_autoloader($class_name)
         if (is_readable($class_file)) {
             require_once $class_file;
         } else {
-            trigger_error(sprintf(__('Error locating class file %s for inclusion', WPOP_TEXT_DOMAIN), $class_file), E_USER_ERROR);
+            trigger_error(sprintf(__('Error locating class file %s for inclusion', 'ops-portal'), $class_file), E_USER_ERROR);
         }
     }
 }

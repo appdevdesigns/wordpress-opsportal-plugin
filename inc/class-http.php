@@ -27,7 +27,7 @@ class Http
     private function __construct()
     {
         if (false === $this->isCurlInstalled()) {
-            trigger_error(__('CURL is not installed, Ops Portal Plugin requires CURL pre-installed', WPOP_TEXT_DOMAIN), E_USER_ERROR);
+            trigger_error(__('CURL is not installed, Ops Portal Plugin requires CURL pre-installed', 'ops-portal'), E_USER_ERROR);
         }
 
         $this->logDir = dirname(dirname(__FILE__)) . '/logs/';

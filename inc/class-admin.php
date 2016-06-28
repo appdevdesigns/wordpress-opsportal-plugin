@@ -75,7 +75,7 @@ class Admin
      */
     public function do_upon_plugins_loaded()
     {
-        load_plugin_textdomain(WPOP_TEXT_DOMAIN, false, dirname(plugin_basename(WPOP_BASE_FILE)) . '/languages/');
+        load_plugin_textdomain('ops-portal', false, dirname(plugin_basename(WPOP_BASE_FILE)) . '/languages/');
     }
 
     /**

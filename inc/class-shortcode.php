@@ -18,8 +18,7 @@ class Shortcode
     /**
      * Process short-code and outputs html
      *
-     * @todo output valid html, prefix 'data' on custom attribute
-     * @return mixed
+     * @return string
      */
     public function process_shortcode()
     {
@@ -29,7 +28,7 @@ class Shortcode
 
         Util::load_view('short-code', array(
             'theme' => $theme,
-            'base_url' => $db['baseURL'] //baseURL contains a slash at end
+            'base_url' => $db['baseURL'] //baseURL contains a slash '/' at end
         ));
         
         return ob_get_clean();

@@ -35,7 +35,7 @@ git clone https://github.com/ithands/wp-ops-portal.git
 cd wp-ops-portal
 git checkout dev
 ```
-* Give write permissions on ```logs``` folder if you want to debug CURL
+* Set write permissions on ```logs``` folder if you want to debug CURL
 ```bash
 sudo chmod -R 755 logs
 sudo chown -R www-data:www-data logs
@@ -57,5 +57,5 @@ sudo chown -R www-data:www-data logs
 
 
 #### License
-[License](LICENSE.txt)
+MIT License
 

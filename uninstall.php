@@ -2,7 +2,8 @@
 
 /**
  * Uninstall file for this plugin
- * This file will be called to remove all traces of this plugin when uninstalled
+ * This file will be called to remove all traces of this plugin when uninstalled  
+ * @link https://developer.wordpress.org/plugins/the-basics/uninstall-methods/
  */
 
 

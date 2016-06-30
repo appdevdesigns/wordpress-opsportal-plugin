@@ -41,7 +41,7 @@ class CLI
         $users = Util::get_not_synced_users(array(), false);
 
         if (empty($users)) {
-            WP_CLI::success('All users synced.');
+            WP_CLI::success('All users synced already.');
             return;
         } else {
             WP_CLI::log('Status: ' . WP_CLI::colorize("%R" . count($users) . "%n") . ' users not synced !' . "\n");
@@ -60,6 +60,9 @@ class CLI
      *
      * ## OPTIONS
      *
+     * [--yes]
+     * : Don't ask for comfirmation.
+     *
      * ## EXAMPLES
      *
      *     wp ops-portal sync --debug
@@ -76,8 +79,10 @@ class CLI
             WP_CLI::error('Base URL not set. Please login to admin dashboard and configure plugin options.');
         }
 
-        //ask for confirmation before proceed
-        WP_CLI::confirm(WP_CLI::colorize('%_Are you sure ?%n'), $assoc_args = array());
+        if (!isset($assoc_args['yes'])) {
+            //ask for confirmation before proceed
+            WP_CLI::confirm(WP_CLI::colorize('%_Are you sure ?%n'), $assoc_args = array());
+        }
 
         $sync = new User_Sync();
         $users = Util::get_not_synced_users(array(), false);

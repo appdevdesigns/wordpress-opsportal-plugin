@@ -3,19 +3,19 @@ namespace AppDev\Plugins\WP_Ops_Portal;
 
 /*
 Plugin Name: WP Ops Portal
-Plugin URI: https://github.com/ithands
+Plugin URI: https://github.com/appdevdesigns
 Description: Ops Portal for WordPress
 Version: 1.0.0
-Author: ITHands
-Author URI: http://ithands.com
-License: GPL2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Author: appdevdesigns
+Author URI: https://github.com/appdevdesigns
+License: MIT
+License URI: https://opensource.org/licenses/MIT
 Text Domain: ops-portal
 Domain Path: /languages
 */
 ?><?php
 //No direct access
-if (!defined('ABSPATH')) die('Are you serious ?');
+if (!defined('ABSPATH')) die('No Direct Access!');
 
 define('WPOP_PLUGIN_VER', '1.0.0');
 define('WPOP_BASE_FILE', __FILE__);

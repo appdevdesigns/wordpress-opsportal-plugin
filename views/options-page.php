@@ -18,9 +18,9 @@
                     <tr>
                         <th scope="row"><?php _e('Base URL', 'ops-portal'); ?> :</th>
                         <td>
-                            <input type="text" size="25" name="ops_portal_options[baseURL]"
+                            <input type="text" size="25" name="ops_portal_options[baseURL]" placeholder="<?php echo esc_attr(home_url()) ?>"
                                    value="<?php echo esc_attr($db['baseURL']); ?>">
-                            <p class="description"><?php _e('Example', 'ops-portal') ?>: <code>http://192.168.1.210:1337</code>
+                            <p class="description"><?php _e('Should be a valid URL', 'ops-portal') ?></p>
                             </p>
                         </td>
                     </tr>
@@ -106,4 +106,6 @@
         </div>
         <?php submit_button() ?>
     </form>
+    <hr>
+    <p>Use <code>[ops_portal]</code> short-code to see Ops Portal interface</p>
 </div>

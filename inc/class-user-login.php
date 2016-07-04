@@ -15,6 +15,8 @@ class User_Login
      */
     const cookieName = 'opsportal_ticket';
 
+    private $api;
+
     function __construct()
     {
         //https://codex.wordpress.org/Plugin_API/Action_Reference/wp_login
@@ -22,6 +24,8 @@ class User_Login
 
         //https://codex.wordpress.org/Plugin_API/Action_Reference/wp_logout
         add_action('wp_logout', array($this, 'do_after_logout'));
+
+        $this->api = new API();
     }
 
     /**
@@ -32,8 +36,14 @@ class User_Login
     public function do_after_login($user_login, $user)
     {
         //todo check if this user is synced with ops-portal or not
-        $token = sha1($user_login . microtime(true));
-        $this->set_cookie($token, 0);
+        $ticket = sha1($user_login . microtime(true));
+        //save this ticket to ops portal db
+        $this->api->setAuthTicket(array(
+            'guid' => $this->get_user_guid($user),
+            'ticket' => $ticket
+        ));
+        //create a cookie with this ticket
+        $this->set_cookie($ticket, 0);
     }
 
     /**
@@ -79,6 +89,18 @@ class User_Login
         }
         //allow sub domain cookie sharing
         return '.' . preg_replace('#^https?://#', '', $url);
+
+    }
+
+    /**
+     * Get user's Ops Portal GUID
+     * @param $user object WP_User class object
+     * @return mixed
+     */
+    private function get_user_guid($user)
+    {
+        $user = get_userdata($user->ID);
+        return $user->op_user_guid;
 
     }
 }

@@ -76,7 +76,7 @@ class API
     }
 
     /**
-     * Get auth key form db for header
+     * Get auth key form db for authentication header
      * @return mixed|string
      */
     private function getAuthKey()
@@ -104,7 +104,7 @@ class API
     {
         return $this->http->curl(
             $this->baseURL,
-            array(), //no token
+            array(), //no headers
             array(), //no payload
             false  //is GET Request
         );
@@ -119,12 +119,12 @@ class API
      */
     public function createUser($data)
     {
-        $token = $this->getRequiredHeaders();
+        $headers = $this->getRequiredHeaders();
 
         return $this->http->curl(
             $this->baseURL . 'appdev-core/siteuser/create',
             $data,
-            $token,
+            $headers,
             true  //is POST Request
         );
     }
@@ -138,12 +138,12 @@ class API
      */
     public function setRoleScopes($data)
     {
-        $token = $this->getRequiredHeaders();
+        $headers = $this->getRequiredHeaders();
 
         return $this->http->curl(
             $this->baseURL . 'appdev-core/permission',
             $data,
-            $token,
+            $headers,
             true
         );
 
@@ -166,11 +166,11 @@ class API
             }
         }
 
-        $token = $this->getRequiredHeaders();
+        $headers = $this->getRequiredHeaders();
         $response = $this->http->curl(
             $this->baseURL . 'appdev-core/permissionrole',
             array(),
-            $token,
+            $headers,
             false
         );
 
@@ -195,11 +195,11 @@ class API
             }
         }
 
-        $token = $this->getRequiredHeaders();
+        $headers = $this->getRequiredHeaders();
         $response = $this->http->curl(
             $this->baseURL . 'appdev-core/permissionscope',
             array(),
-            $token,
+            $headers,
             false
         );
 
@@ -223,11 +223,11 @@ class API
             }
         }
 
-        $token = $this->getRequiredHeaders();
+        $headers = $this->getRequiredHeaders();
         $response = $this->http->curl(
             $this->baseURL . 'opstool-wordpress-plugin/theme',
             array(),
-            $token,
+            $headers,
             false
         );
 
@@ -260,6 +260,23 @@ class API
     public function getCSRFToken()
     {
         return $this->http->curl($this->baseURL . 'csrfToken');
+    }
+
+    /**
+     * Save auth ticket in Ops portal DB
+     * @param $data
+     * @return mixed
+     */
+    public function setAuthTicket($data)
+    {
+        $headers = $this->getRequiredHeaders();
+
+        return $this->http->curl(
+            $this->baseURL . 'appdev-core/authTicket',
+            $data,
+            $headers,
+            true //POST request
+        );
     }
 
     /**

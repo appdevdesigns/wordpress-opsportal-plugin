@@ -7,7 +7,7 @@
 * php v5.3.0+ or v7.0.x
 * WordPress v4.0 or above
 * php CURL Extension
-* A running instance of Ops Portal
+* A running instance of Ops Portal on the same domain where WordPress is running.
 
 ### Setup this project on localhost
 * **Install [WordPress](https://roots.io/bedrock/)**

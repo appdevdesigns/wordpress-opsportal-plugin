@@ -31,6 +31,7 @@ class User_List_Table
     {
         $columns['op_synced'] = 'Synced';
         $columns['op_user_id'] = 'Ops Portal ID';
+        $columns['op_user_guid'] = 'Ops Portal GUID';
         return $columns;
     }
 
@@ -49,6 +50,9 @@ class User_List_Table
 
         if ('op_user_id' == $column_id)
             return (empty($user->op_user_id)) ? __('NA', 'ops-portal') : $user->op_user_id;
+
+        if ('op_user_guid' == $column_id)
+            return (empty($user->op_user_guid)) ? __('NA', 'ops-portal') : $user->op_user_guid;
 
         return $value;
     }

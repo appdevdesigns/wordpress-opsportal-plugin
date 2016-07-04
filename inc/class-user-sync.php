@@ -128,6 +128,7 @@ class User_Sync
         if (isset($response['http_code']) && $response['http_code'] == 201) {
             $op_synced = 1;
             update_user_meta($user_id, 'op_user_id', $response['data']['id']);
+            update_user_meta($user_id, 'op_user_guid', $response['data']['guid']);
         }
         update_user_meta($user_id, 'op_synced', $op_synced);
     }

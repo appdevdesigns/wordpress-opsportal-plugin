@@ -100,9 +100,12 @@ class Http
 
         //Save response to a file for debugging
         if ($this->debug === true) {
-            $response = fopen($this->logDir . 'curl_response.log', 'w');
-            fwrite($response, $data);
-            fclose($response);
+            $file = $this->openFile('curl_response.log');
+            //should be a valid file handler
+            if (!empty($file)) {
+                fwrite($file, $data);
+                fclose($file);
+            }
         }
 
         curl_close($curl);
@@ -129,9 +132,7 @@ class Http
         $curl = curl_init($url);
 
         $default_headers = array(
-            'Accept: application/json',
-            'Cache-Control: no-cache',
-            'Pragma: no-cache'
+            'Accept: application/json'
         );
 
         //Apply custom headers
@@ -157,10 +158,14 @@ class Http
 
         //Write debug info in a text file
         if ($this->debug === true) {
-            $options += array(
-                CURLOPT_VERBOSE => true,
-                CURLOPT_STDERR => fopen($this->logDir . 'curl_stderr.log', 'w')
-            );
+            $file = $this->openFile('curl_stderr.log');
+            //should be a valid handler
+            if (!empty($file)) {
+                $options += array(
+                    CURLOPT_VERBOSE => true,
+                    CURLOPT_STDERR => $file
+                );
+            }
         }
 
         //Only if it is a POST request
@@ -206,6 +211,20 @@ class Http
     {
         return (extension_loaded('curl') && function_exists('curl_version'));
 
+    }
+
+    /**
+     * Open a file handler for writing
+     * @param $file string Valid file name
+     * @return bool
+     */
+    private function openFile($file)
+    {
+        try {
+            return @fopen($this->logDir . $file, 'w');
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
 

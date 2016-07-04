@@ -118,7 +118,7 @@ class User_Sync
     }
 
     /**
-     * Add a flag along with user records if user has been synced or not
+     * Keep some additional info along with user records if user has been synced or not
      * @param $user_id
      * @param $response array Server response
      */

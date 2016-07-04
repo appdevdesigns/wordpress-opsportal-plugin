@@ -39,7 +39,9 @@ class User_Login
      */
     public function do_after_login($user_login, $user)
     {
-        //todo check if this user is synced with ops-portal or not
+        //check if this user is synced with ops-portal or not
+        if (false === $this->should_auto_login($user)) return;
+        //generate a random string for ticket, make sure it don't cross the limit
         $ticket = Util::randomString();
         //save this ticket to ops portal db
         $this->api->setAuthTicket(array(
@@ -91,7 +93,7 @@ class User_Login
         } else {
             $url = home_url();
         }
-        //allow sub domain cookie sharing
+        //allow sub domain cookie sharing , remove 'https://' prefix
         return '.' . preg_replace('#^https?://#', '', $url);
 
     }
@@ -106,5 +108,16 @@ class User_Login
         $user = get_userdata($user->ID);
         return $user->op_user_guid;
 
+    }
+
+    /**
+     * Check if this user is synced to ops portal or not
+     * @param $user
+     * @return bool
+     */
+    private function should_auto_login($user)
+    {
+        $user = get_userdata($user->ID);
+        return (!empty($user->op_synced) && !empty($user->op_user_guid));
     }
 }

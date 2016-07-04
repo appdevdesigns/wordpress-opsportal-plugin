@@ -1,5 +1,6 @@
 <?php
 //only visible to logged in users
+//todo also check if cookie exists ?
 if (is_user_logged_in()) {
     if (!empty($base_url)) {
         ?>

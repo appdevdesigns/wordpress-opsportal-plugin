@@ -15,6 +15,10 @@ class User_Login
      */
     const cookieName = 'opsportal_ticket';
 
+    /**
+     * API class instance
+     * @var API
+     */
     private $api;
 
     function __construct()
@@ -36,7 +40,7 @@ class User_Login
     public function do_after_login($user_login, $user)
     {
         //todo check if this user is synced with ops-portal or not
-        $ticket = sha1($user_login . microtime(true));
+        $ticket = Util::randomString();
         //save this ticket to ops portal db
         $this->api->setAuthTicket(array(
             'guid' => $this->get_user_guid($user),

@@ -111,4 +111,18 @@ class Util
         return ($count) ? $users->get_total() : $users->get_results();
 
     }
+
+    /**
+     * Generate random string
+     * @return mixed
+     */
+    public static function randomString()
+    {
+        //support php 7.0
+        if (function_exists('random_bytes')) {
+            return bin2hex(random_bytes(30));
+        }
+        //php 5.3 compatibility
+        return base64_encode(openssl_random_pseudo_bytes(30));
+    }
 }

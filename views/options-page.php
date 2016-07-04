@@ -21,7 +21,15 @@
                             <input type="text" size="25" name="ops_portal_options[baseURL]" placeholder="<?php echo esc_attr(home_url()) ?>"
                                    value="<?php echo esc_attr($db['baseURL']); ?>">
                             <p class="description"><?php _e('Should be a valid URL', 'ops-portal') ?></p>
-                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php _e('Auth Key', 'ops-portal'); ?> :</th>
+                        <td>
+                            <input id="op-input-key" type="password" size="25" name="ops_portal_options[authKey]"
+                                   value="<?php echo esc_attr($db['authKey']); ?>">
+                            <button id="op-btn-show-key" type="button" class="button button-secondary wp-hide-pw" title="Show / Hide"><i class="dashicons dashicons-visibility"></i></button>
+                            <p class="description"><?php _e('Paste secret key here', 'ops-portal') ?></p>
                         </td>
                     </tr>
                     <tr>

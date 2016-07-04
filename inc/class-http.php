@@ -14,14 +14,23 @@ class Http
 
     private static $instances = array();
 
-    //Directory path; where to store logs
+    /**
+     * Directory path; where to store logs
+     * @var string
+     */
     private $logDir;
 
-    //The cookie file will be created in system's temp folder
-    //Cookie file name will be same for each single php request
+    /**
+     * The cookie file will be created in system's temp folder
+     * Cookie file name will be same for each single php request
+     * @var
+     */
     private $cookieFile;
 
-    //Debug CURL
+    /**
+     * Debug CURL OR not ?
+     * @var bool
+     */
     private $debug;
 
     private function __construct()

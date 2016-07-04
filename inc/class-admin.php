@@ -8,8 +8,16 @@ namespace AppDev\Plugins\WP_Ops_Portal;
 class Admin
 {
 
+    /**
+     * Plugin slug to be used across system
+     * @var string
+     */
     const PLUGIN_SLUG = 'ops_portal';
 
+    /**
+     * Settings class instance
+     * @var Settings
+     */
     private $settings;
 
     function __construct()
@@ -46,6 +54,7 @@ class Admin
             self::PLUGIN_SLUG,
             array($this->settings, 'load_options_page'));
 
+        //Add css,js only on this page
         add_action('admin_print_scripts-' . $page_hook_suffix, array($this, 'add_admin_assets'));
     }
 

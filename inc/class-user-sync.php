@@ -9,9 +9,16 @@ namespace AppDev\Plugins\WP_Ops_Portal;
  */
 class User_Sync
 {
-    //API class instance
+    /**
+     * API class instance
+     * @var API
+     */
     private $api;
-    //Store plugin db options
+
+    /**
+     * Store plugin db options
+     * @var array
+     */
     private $db;
 
     function __construct()
@@ -48,6 +55,7 @@ class User_Sync
         $user_ids = array_unique($user_ids);
         $users = Util::get_not_synced_users($user_ids);
 
+        //todo Can we create all users in a single request ?
         foreach ($users as $user) {
             $this->send_create_user_call($user, $user->ID);
         }
@@ -68,7 +76,8 @@ class User_Sync
         return $response;
     }
 
-    /** Create the request body for create user request
+    /**
+     * Create the request body for create user request
      * @param $user
      * @return array
      */

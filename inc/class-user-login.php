@@ -9,7 +9,11 @@ namespace AppDev\Plugins\WP_Ops_Portal;
  */
 class User_Login
 {
-    const cookieName = 'wp-ops-portal-user';
+    /**
+     * Cookie name that Ops Portal recognize
+     * @var string
+     */
+    const cookieName = 'opsportal_ticket';
 
     function __construct()
     {

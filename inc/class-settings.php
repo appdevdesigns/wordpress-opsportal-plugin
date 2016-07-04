@@ -9,6 +9,10 @@ class Settings
     const WPOP_OPTION_GROUP = 'ops_portal_options';
     const PLUGIN_SLUG = 'ops_portal';
 
+    /**
+     * API Class instance
+     * @var API
+     */
     private $api;
 
     function __construct()
@@ -21,8 +25,6 @@ class Settings
 
         // To save default options upon activation
         register_activation_hook(plugin_basename(WPOP_BASE_FILE), array($this, 'do_upon_plugin_activation'));
-
-        add_action('admin_notices', array($this, 'add_admin_notice'));
 
         $this->api = new API();
     }
@@ -37,6 +39,7 @@ class Settings
         return array(
             'pluginVer' => WPOP_PLUGIN_VER,//always store plugin version in db, it will help in upgrades
             'baseURL' => '',
+            'authKey' => '',
             'debugCURL' => 0,
             'defaultRole' => '',
             'defaultScopes' => array(),
@@ -50,7 +53,7 @@ class Settings
     public function do_upon_plugin_activation()
     {
         //If db options not exists then update with defaults
-        if (get_option(WPOP_OPTION_NAME) == false) {
+        if (false == get_option(WPOP_OPTION_NAME)) {
             update_option(WPOP_OPTION_NAME, $this->get_default_options());
         }
 
@@ -161,6 +164,13 @@ class Settings
             $out['baseURL'] = trailingslashit(sanitize_text_field($in['baseURL']));
         }
 
+        if (empty($in['authKey'])) {
+            $out['authKey'] = '';
+            add_settings_error(WPOP_OPTION_NAME, 'authKey', __('Auth Key is required.', 'ops-portal'));
+        } else {
+            $out['authKey'] = sanitize_text_field($in['authKey']);
+        }
+
         if (empty($in['defaultScopes'])) {
             add_settings_error(WPOP_OPTION_NAME, 'defaultScopes', __('At-least one scope should be selected.', 'ops-portal'));
         }
@@ -235,38 +245,6 @@ class Settings
             return $response['data'];
         }
         return array();
-    }
-
-    /**
-     * Check if Ops Portal is up and running
-     * Show a error notice when response code is not 200
-     */
-    public function add_admin_notice()
-    {
-        if (!$this->is_ops_screen()) return;
-        $db = $this->get_safe_options();
-        //If base URL not set return early
-        if (empty($db) || empty($db['baseURL'])) return;
-
-        $response = $this->api->callHome();
-        if (empty($response) || $response['http_code'] != 200):
-            Util::load_view('admin-notice', array(
-                    'type' => 'error',
-                    'message' => __('Failed to connect to Ops Portal. Server response code', 'ops-portal') . ': ' . $response['http_code']
-                )
-            );
-        endif;
-    }
-
-    /**
-     * Check if user on settings page
-     * @return bool
-     */
-    private function is_ops_screen()
-    {
-        $screen = get_current_screen();
-        return ($screen->id == "settings_page_" . self::PLUGIN_SLUG);
-
     }
 
 }

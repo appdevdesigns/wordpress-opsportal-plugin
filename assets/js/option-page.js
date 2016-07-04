@@ -1,4 +1,4 @@
-(function (window, jQuery) {
+(function (window, document, jQuery) {
     'use strict';
     //Get requested tab from url
     var requestedTab = window.location.hash.replace('#top#', '');
@@ -40,5 +40,25 @@
             //Update the tab id in last while keeping base url same
             $input.val(split[0] + '?page=ops_portal#top#' + url);
         }
+
+        /**
+         * Show auth hide key
+         */
+        var $opInputKey = $('#op-input-key'),
+            $opBtnShowKey = $('#op-btn-show-key'),
+            $icon = '';
+
+        $opBtnShowKey.on('click.op', function (e) {
+            e.preventDefault();
+            $icon = $(this).find('i');
+            if ($icon.hasClass('dashicons-visibility')) {
+                $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
+                $opInputKey.prop('type', 'text');
+            } else {
+                $icon.removeClass('dashicons-hidden').addClass('dashicons-visibility');
+                $opInputKey.prop('type', 'password');
+            }
+
+        });
     });
-})(window, jQuery);
+})(window, document, jQuery);

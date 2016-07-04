@@ -16,7 +16,7 @@ class User_List_Table
         add_filter('manage_users_columns', array($this, 'add_new_columns'));
         add_action('manage_users_custom_column', array($this, 'show_column_value'), 10, 3);
 
-        //http://wordpress.stackexchange.com/questions/121632/add-a-button-to-users-php
+        //@link http://wordpress.stackexchange.com/questions/121632/add-a-button-to-users-php
         add_action('admin_footer', array($this, 'add_sync_option'), 11);
         add_action('load-users.php', array($this, 'do_bulk_user_sync'));
         add_action('admin_notices', array($this, 'add_admin_notice'));

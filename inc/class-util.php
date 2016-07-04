@@ -8,11 +8,11 @@ class Util
 {
     function __construct()
     {
-        //
+        // do something
     }
 
     /**
-     * Load a view
+     * Load a view from views folder
      * @param $file string php File name without extension
      * @param $vars array Variables to pass to view
      */

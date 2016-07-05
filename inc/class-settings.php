@@ -155,34 +155,40 @@ class Settings
     {
         $out = array();
         $out['pluginVer'] = WPOP_PLUGIN_VER; //always save plugin version to db
+        $errors = array();
 
         //check for valid url
         if (filter_var(trim($in['baseURL']), FILTER_VALIDATE_URL) === false) {
             $out['baseURL'] = '';
-            add_settings_error(WPOP_OPTION_NAME, 'baseURL', __('Base URL was not a valid URL.', 'ops-portal'));
+            $errors[] = __('Base URL was not a valid URL.', 'ops-portal');
         } else {
             $out['baseURL'] = trailingslashit(sanitize_text_field($in['baseURL']));
         }
 
         if (empty($in['authKey'])) {
             $out['authKey'] = '';
-            add_settings_error(WPOP_OPTION_NAME, 'authKey', __('Auth Key is required.', 'ops-portal'));
+            $errors[] = __('Auth Key is required.', 'ops-portal');
         } else {
             $out['authKey'] = sanitize_text_field($in['authKey']);
         }
 
         if (empty($in['defaultScopes'])) {
-            add_settings_error(WPOP_OPTION_NAME, 'defaultScopes', __('At-least one scope should be selected.', 'ops-portal'));
+            $errors[] = __('At-least one scope should be selected.', 'ops-portal');
         }
 
         if (empty($in['defaultRole'])) {
-            add_settings_error(WPOP_OPTION_NAME, 'defaultRole', __('A role should be selected.', 'ops-portal'));
+            $errors[] = __('A role should be selected.', 'ops-portal');
         }
 
         if (isset($in['submit-flush'])) {
             //delete transients
             Util::delete_transients();
             add_settings_error(WPOP_OPTION_NAME, 'ops-portal-flushed', __('Cache has been cleared', 'ops-portal'), 'updated');
+        }
+
+        //show all form errors in a single notice
+        if (!empty($errors)) {
+            add_settings_error(WPOP_OPTION_NAME, 'ops-portal', implode('<br>', $errors));
         }
 
         $out['debugCURL'] = isset($in['debugCURL']);

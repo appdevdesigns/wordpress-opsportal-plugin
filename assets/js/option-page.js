@@ -1,4 +1,4 @@
-(function (window, document, jQuery) {
+(function (window, document, Math, jQuery) {
     'use strict';
     //Get requested tab from url
     var requestedTab = window.location.hash.replace('#top#', '');
@@ -49,6 +49,7 @@
          */
         var $opInputKey = $('#op-input-key'),
             $opBtnShowKey = $('#op-btn-show-key'),
+            $opBtnGenKey = $('#op-btn-gen-key'),
             $icon = $opBtnShowKey.find('i');
 
         $opBtnShowKey.on('click.op', function (e) {
@@ -62,5 +63,20 @@
             }
 
         });
+
+        //Set random string In input field
+        $opBtnGenKey.on('click.op', function (e) {
+            e.preventDefault();
+            $opInputKey.val(getRandomString());
+
+        });
+
+        /**
+         * Generate a new random string
+         * @returns {string}
+         */
+        function getRandomString() {
+            return (Math.random() * 1e64).toString(36).slice(2);
+        }
     });
-})(window, document, jQuery);
+})(window, document, Math, jQuery);

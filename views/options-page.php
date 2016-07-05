@@ -30,7 +30,9 @@
                                    value="<?php echo esc_attr($db['authKey']); ?>">
                             <button id="op-btn-show-key" type="button" class="button button-secondary wp-hide-pw"
                                     title="Show / Hide"><i class="dashicons dashicons-visibility"></i></button>
-                            <p class="description"><?php _e('Paste secret key here', 'ops-portal') ?></p>
+                            <button id="op-btn-gen-key" type="button" class="button button-secondary wp-hide-pw"
+                                    title="Generate"><i class="dashicons dashicons-admin-network"></i></button>
+                            <p class="description"><?php _e('Paste your secret key here', 'ops-portal') ?></p>
                         </td>
                     </tr>
                     <tr>

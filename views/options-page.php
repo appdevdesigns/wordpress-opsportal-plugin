@@ -106,7 +106,8 @@
                 </table>
             </section>
         </div>
-        <?php submit_button() ?>
+        <p class="submit"><?php submit_button(__('Save Changes'), 'primary', 'submit', false); ?>
+            &emsp; <?php submit_button('Flush Cache', 'large', 'ops_portal_options[submit-flush]', false) ?></p>
     </form>
     <hr>
     <p>Use <code>[ops_portal]</code> short-code to see Ops Portal interface</p>

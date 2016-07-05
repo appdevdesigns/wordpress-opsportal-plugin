@@ -179,6 +179,12 @@ class Settings
             add_settings_error(WPOP_OPTION_NAME, 'defaultRole', __('A role should be selected.', 'ops-portal'));
         }
 
+        if (isset($in['submit-flush'])) {
+            //delete transients
+            Util::delete_transients();
+            add_settings_error(WPOP_OPTION_NAME, 'ops-portal-flushed', __('Cache has been cleared', 'ops-portal'), 'updated');
+        }
+
         $out['debugCURL'] = isset($in['debugCURL']);
         $out['defaultRole'] = intval($in['defaultRole']);
         $out['defaultScopes'] = (array)$in['defaultScopes'];

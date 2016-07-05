@@ -9,9 +9,12 @@
             $input = $("form#op-form").find('input:hidden[name="_wp_http_referer"]'),
             $sections = $('section.tab-content');
 
-        //If there no active tab found , set first tab as active
-        if (requestedTab === '') requestedTab = $sections.attr('id');
+        //If there no active tab found, set first tab as active
+        if (requestedTab == '' || $('#' + requestedTab).length == 0) requestedTab = $sections.attr('id');
+        //Set that tab active,
+        //Notice: we are not using cached DOM in next line
         $('#' + requestedTab).addClass('active');
+        //Set related tab content active
         $('#' + requestedTab + '-tab').addClass('nav-tab-active');
         //Set return tab on page load
         setRedirectURL(requestedTab);
@@ -46,11 +49,10 @@
          */
         var $opInputKey = $('#op-input-key'),
             $opBtnShowKey = $('#op-btn-show-key'),
-            $icon = '';
+            $icon = $opBtnShowKey.find('i');
 
         $opBtnShowKey.on('click.op', function (e) {
             e.preventDefault();
-            $icon = $(this).find('i');
             if ($icon.hasClass('dashicons-visibility')) {
                 $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
                 $opInputKey.prop('type', 'text');

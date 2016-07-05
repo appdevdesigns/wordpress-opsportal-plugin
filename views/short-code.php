@@ -16,11 +16,15 @@ if (is_user_logged_in()) {
         <?php
     } else {
         ?>
-        <!-- Ops Portal not configured properly -->
+        <div class="ops-portal-error">
+            <p><?php _e('Ops Portal plugin not configured properly', 'ops-portal'); ?></p>
+        </div>
         <?php
     }
 } else {
     ?>
-    <!-- Ops Portal - You are not logged in to WordPress-->
+    <div class="ops-portal-error ops-portal-not-logged-in">
+        <p><?php _e('You must be logged-in to WordPress in order to see Ops Portal interface', 'ops-portal'); ?></p>
+    </div>
     <?php
 }

@@ -220,18 +220,12 @@ class Settings
     {
         $response = $this->api->getThemesList();
 
-        //default theme does not exist
-        $themes[] = array(
-            'path' => 0,
-            'name' => __('Default', 'ops-portal')
-        );
-
         $data = $this->check_and_return_response($response);
         //theme endpoint returns response in a different format
         if (isset($data['status']) && $data['status'] == 'success') {
-            return array_merge($themes, $data['data']);
+            return $data['data'];
         }
-        return $themes;
+        return array();
 
     }
 

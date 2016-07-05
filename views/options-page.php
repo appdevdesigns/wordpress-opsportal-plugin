@@ -3,7 +3,6 @@
 
     <h2 class="nav-tab-wrapper" id="op-tabs">
         <a class="nav-tab" id="op-general-tab" href="#top#op-general"><?php _e('General', 'ops-portal') ?></a>
-        <a class="nav-tab" id="op-interface-tab" href="#top#op-interface"><?php _e('Interface', 'ops-portal') ?></a>
         <a class="nav-tab" id="op-troubleshoot-tab"
            href="#top#op-troubleshoot"><?php _e('Troubleshoot', 'ops-portal') ?></a>
     </h2>
@@ -18,7 +17,8 @@
                     <tr>
                         <th scope="row"><?php _e('Base URL', 'ops-portal'); ?> :</th>
                         <td>
-                            <input type="text" size="25" name="ops_portal_options[baseURL]" placeholder="<?php echo esc_attr(home_url()) ?>"
+                            <input type="text" size="25" name="ops_portal_options[baseURL]"
+                                   placeholder="<?php echo esc_attr(home_url()) ?>"
                                    value="<?php echo esc_attr($db['baseURL']); ?>">
                             <p class="description"><?php _e('Should be a valid URL', 'ops-portal') ?></p>
                         </td>
@@ -28,7 +28,8 @@
                         <td>
                             <input id="op-input-key" type="password" size="25" name="ops_portal_options[authKey]"
                                    value="<?php echo esc_attr($db['authKey']); ?>">
-                            <button id="op-btn-show-key" type="button" class="button button-secondary wp-hide-pw" title="Show / Hide"><i class="dashicons dashicons-visibility"></i></button>
+                            <button id="op-btn-show-key" type="button" class="button button-secondary wp-hide-pw"
+                                    title="Show / Hide"><i class="dashicons dashicons-visibility"></i></button>
                             <p class="description"><?php _e('Paste secret key here', 'ops-portal') ?></p>
                         </td>
                     </tr>
@@ -59,24 +60,17 @@
                             </fieldset>
                         </td>
                     </tr>
-                </table>
-            </section>
-            <section id="op-interface" class="tab-content">
-                <table class="form-table">
                     <tr>
-                        <th scope="row"><?php _e('Default theme', 'ops-portal') ?> :</th>
-                        <td>
-                            <fieldset>
+                        <th scope="row"><?php _e('Default Theme', 'ops-portal') ?> :</th>
+                        <td><select name="ops_portal_options[defaultTheme]">
+                                <option disabled value=""><?php _e('Select a Theme', 'ops-portal'); ?></option>
+                                <option value=""><?php _e('Default Theme', 'ops-portal'); ?></option>
                                 <?php
                                 foreach ($themes as $theme) {
-                                    echo '<label>';
-                                    echo '<input type="radio" name="ops_portal_options[defaultTheme]" ';
-                                    echo 'value="' . $theme['path'] . '" ' . checked($db['defaultTheme'], $theme['path'], false);
-                                    echo '>&ensp;' . ucwords($theme['name']);
-                                    echo '</label><br>';
+                                    echo '<option value="' . $theme['path'] . '"' . selected($db['defaultTheme'], $theme['path'], false) . '>' . ucwords($theme['name']) . '</option>';
                                 }
                                 ?>
-                            </fieldset>
+                            </select>
                         </td>
                     </tr>
                 </table>

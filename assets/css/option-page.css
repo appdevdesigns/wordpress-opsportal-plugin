@@ -18,3 +18,8 @@ pre.code-dump {
     word-wrap: break-word;
     word-break: break-all;
 }
+
+p.ops-error {
+    color: #ac1b1b;
+    font-style: normal;
+}

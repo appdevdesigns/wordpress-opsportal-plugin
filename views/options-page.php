@@ -45,6 +45,9 @@
                                 }
                                 ?>
                             </select>
+                            <?php if (empty($roles)): ?>
+                                <p class="description ops-error"><?php _e('Unable to fetch roles', 'ops-portal') ?></p>
+                            <?php endif ?>
                         </td>
                     </tr>
                     <tr>
@@ -60,6 +63,9 @@
                                 }
                                 ?>
                             </fieldset>
+                            <?php if (empty($scopes)): ?>
+                                <p class="description ops-error"><?php _e('Unable to fetch scopes', 'ops-portal') ?></p>
+                            <?php endif ?>
                         </td>
                     </tr>
                     <tr>
@@ -73,6 +79,9 @@
                                 }
                                 ?>
                             </select>
+                            <?php if (empty($themes)): ?>
+                                <p class="description ops-error"><?php _e('Unable to fetch themes', 'ops-portal') ?></p>
+                            <?php endif ?>
                         </td>
                     </tr>
                 </table>

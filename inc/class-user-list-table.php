@@ -70,10 +70,12 @@ class User_List_Table
             (function (doc) {
                 'use strict';
                 doc.addEventListener('DOMContentLoaded', function (event) {
+                    var select = doc.querySelector('#bulk-action-selector-top');
+                    if (select === null) return;
                     var op = doc.createElement('option');
                     op.value = 'op_bulk_sync';
                     op.text = '<?php _e('Sync to Ops Portal', 'ops-portal') ?>';
-                    doc.querySelector('#bulk-action-selector-top').appendChild(op);
+                    select.appendChild(op);
                 });
             })(document);
         </script>

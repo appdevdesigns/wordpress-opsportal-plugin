@@ -79,6 +79,10 @@ class CLI
             WP_CLI::error('Base URL not set. Please login to admin dashboard and configure plugin options.');
         }
 
+        if (empty($db['authKey'])) {
+            WP_CLI::error('Auth Key not set. Please login to admin dashboard and configure plugin options.');
+        }
+
         if (!isset($assoc_args['yes'])) {
             //ask for confirmation before proceed
             WP_CLI::confirm(WP_CLI::colorize('%_Are you sure ?%n'), $assoc_args = array());

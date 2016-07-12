@@ -3,7 +3,7 @@ namespace AppDev\Plugins\WP_Ops_Portal;
 
 /*
 Plugin Name: WP Ops Portal
-Plugin URI: https://github.com/appdevdesigns
+Plugin URI: https://github.com/appdevdesigns/wordpress-opsportal-plugin
 Description: Ops Portal for WordPress
 Version: 1.0.0
 Author: appdevdesigns

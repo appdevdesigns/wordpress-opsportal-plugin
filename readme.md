@@ -1,19 +1,27 @@
 # WP Ops Portal
 
-> WordPress plugin for Ops Portal
+> A WordPress plugin to enable the OpsPortal to run inside.
 
 
 ### Prerequisite
 * php v5.3.0+ or v7.0.x
 * apache 2.4 with ```proxy_http``` module enabled
-* mySql 5.6
+* MySQL 5.6
 * WordPress v4.0 or above
-* php CURL Extension to talk with APIs on Ops Portal
+* php [cURL Extension](http://php.net/manual/en/book.curl.php) to talk with APIs on Ops Portal
+* [Composer](https://getcomposer.org/download/) (If you want to use modern WordPress)
+* [wp-cli](http://wp-cli.org/#installing) (If you want to use command line in WordPress)
 * A running instance of Ops Portal on the same domain where WordPress is running.
+    * If your WordPress is running on ```http://example.com```
+    * The Ops Portal instance should be running on subdomain like: ```http://opsportal.example.com```
+* _WordPress and Ops Portal may have its own additional requirements_
 
 ### Setup this project on localhost
-* **Install [WordPress](https://roots.io/bedrock/)**
+* **Install [WordPress](https://codex.wordpress.org/Installing_WordPress)** good old way
+* **Install [WordPress](https://github.com/roots/bedrock#installation)** modern way
+* Download WordPress core and dependencies
 ```bash
+cd ~
 composer create-project roots/bedrock wordpress "1.6.*"
 ```
 * Copy ```.env.example``` to ```.env``` and update environment variables
@@ -22,13 +30,43 @@ cd wordpress
 cp .env.example .env
 nano .env
 ```
-* Create a virtual host named ```wp-test.local``` that points to ```wordpress/web``` folder
-* Install WordPress via [WP CLI](https://wp-cli.org/commands/core/install/)
+* Create a [virtual host](https://httpd.apache.org/docs/current/vhosts/) named ```wp-test.local``` that points to ```wordpress/web``` folder
+```
+# Ubuntu, apache2.4
+# Example virtual host file
+# /etc/apache2/sites-available/wordpress.conf
+<VirtualHost *:80>
+
+	ServerName wp-test.local
+	ServerAdmin webmaster@localhost
+	DocumentRoot /home/user_name/projects/wordpress/web
+
+	<Directory "/home/user_name/projects/wordpress/web/">
+		Order allow,deny
+		AllowOverride All
+		Allow from all
+		Require all granted
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+```
+* Make an entry in ```/etc/hosts```
+```
+127.0.0.1 wp-test.local
+```
+* Enable this vhost ```sudo a2ensite wordpress.conf```
+* Don't forget to restart apache server after creating vhost
+* Seed WordPress database via [WP CLI](https://wp-cli.org/commands/core/install/)
 ```
 wp core install --url='http://wp-test.local' --title='WP Test' --admin_user='yourname' --admin_password='password' --admin_email='admin@wp.local' --skip-email
 ```
-* Login to wp-admin ```http://wp-test.local/wp/wp-admin```
-* You can also check ```./config/environments/development.php``` file for various WP constants
+* You can skip above command and manually install WordPress via web wizard
+* Login to wp-admin ```http://wp-test.local/wp/wp-admin```  with credentials you pass in command above
+* You can also check ```./wordpress/config/environments/development.php``` file for various WP constants
 
 * **Clone this plugin inside WordPress plugins folder**
 ```bash
@@ -42,15 +80,21 @@ git checkout dev
 sudo chmod -R 755 logs
 sudo chown -R www-data:www-data logs
 ```
+* Plugin can write CURL response in ```logs``` folder for debugging
 
 * **Install Ops Portal**
 * Follow [this](https://github.com/appdevdesigns/opsportal_docs/blob/master/develop/develop_setup.md) guide to install Ops Portal
-* Install [opstool-wordpress-plugin](https://github.com/appdevdesigns/opstool-wordpress-plugin), (develop branch)
+* Install [opstool-wordpress-plugin](https://github.com/appdevdesigns/opstool-wordpress-plugin), (node module)
+```
+cd sails
+npm install git://github.com/appdevdesigns/opstool-wordpress-plugin#develop
+```
 
 * Ops Portal should be running on the sub-domain like: ```opsportal.wp-test.local``` in order to share cookies with WordPress
-* Use [this](http://stackoverflow.com/questions/8541182/apache-redirect-to-another-port) apache conf file to configure Ops Portal
+* Use [this](http://stackoverflow.com/questions/8541182/apache-redirect-to-another-port) apache conf file to configure Ops Portal to run on subdomain
 ```
-   # /etc/apache2/site-available/ops-portal.conf
+   # Ubuntu, apache 2.4
+   # /etc/apache2/site-available/opsportal.conf
    <VirtualHost *:80>
      ProxyPreserveHost On
      ProxyRequests Off
@@ -63,14 +107,26 @@ sudo chown -R www-data:www-data logs
 
    </VirtualHost>
 ```
-* Make sure apache proxy module is enabled ```sudo a2enmod proxy_http```
+* Make an entry in ```/etc/hosts```
+```
+127.0.0.1 opsportal.wp-test.local
+```
+* Enable this vhost ```sudo a2ensite opsportal.conf```
+* Make sure apache [proxy module](https://httpd.apache.org/docs/current/mod/mod_proxy.html) is enabled
+* Don't forget to restart apache server after creating vhost
+* Start sails
+```
+cd ~/projects/sails
+sails lift
+```
+* _Some command and paths may vary from platform to platform_
 
-
-### How to install this plugin in WordPress
-- Download the plugin (zip) from GitHub (master branch)
+### How to install this plugin in WordPress - End User guide
+- Download the plugin (zip) from GitHub (master branch for stable version)
 - Login to WordPress Admin panel (wp-admin)
 - Go through menus Plugin->Add New->Upload Plugin
 - Upload the .zip file there.
+- You can also use FTP to upload the zip contents
 - Activate the plugin when asked
 - Go through Settings->Ops portal
 - Configure plugin options and Save settings
@@ -85,12 +141,12 @@ wp opsportal
 * Check sync status
 ```
 wp opsportal status
+# Also show list of users
+wp opsportal status --all
 ```
 * Bulk Sync users to Ops Portal
 ```
 wp opsportal sync
 ```
 
-#### License
-MIT License
 

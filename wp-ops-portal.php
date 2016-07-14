@@ -8,8 +8,8 @@ Description: Ops Portal for WordPress
 Version: 1.0.0
 Author: appdevdesigns
 Author URI: https://github.com/appdevdesigns
-License: MIT
-License URI: https://opensource.org/licenses/MIT
+License: ?
+License URI: https://opensource.org/licenses/
 Text Domain: ops-portal
 Domain Path: /languages
 */

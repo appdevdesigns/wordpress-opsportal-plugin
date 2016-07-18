@@ -94,7 +94,8 @@ class User_Login
             $url = home_url();
         }
         //allow sub domain cookie sharing , remove 'https://' prefix
-        return '.' . preg_replace('#^https?://#', '', $url);
+        //should not include port number
+        return '.' . parse_url($url, PHP_URL_HOST);
 
     }
 

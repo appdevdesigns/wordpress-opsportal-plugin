@@ -17,6 +17,7 @@ Domain Path: /languages
 //No direct access
 if (!defined('ABSPATH')) die('No Direct Access!');
 
+//Update plugin version whenever a new version is out
 define('WPOP_PLUGIN_VER', '1.0.0');
 define('WPOP_BASE_FILE', __FILE__);
 define('WPOP_OPTION_NAME', 'ops_portal_options');

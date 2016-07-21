@@ -95,22 +95,6 @@ class API
     }
 
     /**
-     * Ping baseURL
-     *
-     * @GET
-     * @return mixed
-     */
-    public function callHome()
-    {
-        return $this->http->curl(
-            $this->baseURL,
-            array(), //no headers
-            array(), //no payload
-            false  //is GET Request
-        );
-    }
-
-    /**
      * Create a new user
      *
      * @POST

@@ -23,10 +23,10 @@ class User_Sync
 
     function __construct()
     {
-        //https://codex.wordpress.org/Plugin_API/Action_Reference/user_register
+        //@link https://codex.wordpress.org/Plugin_API/Action_Reference/user_register
         add_action('user_register', array($this, 'create_single_user'), 10, 1);
 
-        //https://codex.wordpress.org/Plugin_API/Action_Reference/delete_user
+        //@link https://codex.wordpress.org/Plugin_API/Action_Reference/delete_user
         //add_action('delete_user', array($this, 'delete_ops_portal_user'), 10, 1);
 
         $this->api = new API();
@@ -40,7 +40,7 @@ class User_Sync
      */
     public function create_single_user($user_id)
     {
-        //https://codex.wordpress.org/Function_Reference/get_userdata
+        //@link https://codex.wordpress.org/Function_Reference/get_userdata
         $user = get_userdata($user_id);
         return $this->send_create_user_call($user, $user_id);
 
@@ -86,7 +86,6 @@ class User_Sync
         return array(
             'username' => $user->user_login,
             'email' => $user->user_email,
-            //'guid' => uniqid('', true), //Don't send, server will auto generate it
             'isActive' => 1 //Activate as soon as they register ?
         );
     }

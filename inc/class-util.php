@@ -106,7 +106,7 @@ class Util
         if (count($user_ids)) {
             $args['include'] = (array)$user_ids;
         }
-        //https://codex.wordpress.org/Class_Reference/WP_User_Query
+        //@link https://codex.wordpress.org/Class_Reference/WP_User_Query
         $users = new \WP_User_Query($args);
         return ($count) ? $users->get_total() : $users->get_results();
 
@@ -118,7 +118,7 @@ class Util
      */
     public static function randomString()
     {
-        //support php 7.0
+        //Support php 7.0
         if (function_exists('random_bytes')) {
             return bin2hex(random_bytes(30));
         }

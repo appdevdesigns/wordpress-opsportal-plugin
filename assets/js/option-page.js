@@ -1,5 +1,7 @@
 (function (window, document, Math, jQuery) {
     'use strict';
+    //Note: All events are namespaced
+
     //Get requested tab from url
     var requestedTab = window.location.hash.replace('#top#', '');
 
@@ -45,7 +47,7 @@
         }
 
         /**
-         * Show auth hide key
+         * Auth key show/hide
          */
         var $opInputKey = $('#op-input-key'),
             $opBtnShowKey = $('#op-btn-show-key'),

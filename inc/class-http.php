@@ -5,9 +5,9 @@ namespace AppDev\Plugins\WP_Ops_Portal;
 /**
  * Class Http
  *
- * A portable class that can be used anywhere to perform CURL calls
+ * A portable class that can be used anywhere to perform cURL calls
  * @package AppDev\Plugins\WP_Ops_Portal
- * @todo How can we replace this with WordPress inbuilt HTTP API - https://codex.wordpress.org/HTTP_API
+ * @todo How can we replace this class with WordPress inbuilt HTTP API - https://codex.wordpress.org/HTTP_API
  */
 class Http
 {

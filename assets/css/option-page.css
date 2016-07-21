@@ -1,25 +1,25 @@
 @charset "UTF-8";
 
 .tab-content {
-    display: none
+  display: none
 }
 
 .tab-content.active {
-    display: block
+  display: block
 }
 
 pre.code-dump {
-    max-height: 300px;
-    max-width: 960px;
-    overflow: auto;
-    border: 1px solid #e2e2e2;
-    padding: 5px;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-all;
+  max-height: 300px;
+  max-width: 960px;
+  overflow: auto;
+  border: 1px solid #e2e2e2;
+  padding: 5px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 p.ops-error {
-    color: #ac1b1b;
-    font-style: normal;
+  color: #ac1b1b;
+  font-style: normal;
 }

@@ -22,7 +22,7 @@ class CLI
      *
      * ## OPTIONS
      *
-     * [--all]
+     * [--list]
      * : Show a tabular formatted list of not synced users.
      *
      * [--format=<format>]
@@ -47,7 +47,7 @@ class CLI
             WP_CLI::log('Status: ' . WP_CLI::colorize("%R" . count($users) . "%n") . ' users not synced !' . "\n");
         }
 
-        if (isset($assoc_args['all'])) {
+        if (isset($assoc_args['list'])) {
             $format = WP_CLI\Utils\get_flag_value($assoc_args, 'format', 'table');
             //@link https://wp-cli.org/docs/internal-api/wp-cli-utils-format-items/
             WP_CLI\Utils\format_items($format, $users, array('ID', 'user_login', 'user_email'));

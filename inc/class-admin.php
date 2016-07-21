@@ -34,7 +34,7 @@ class Admin
         // Be multilingual
         add_action('plugins_loaded', array($this, 'do_upon_plugins_loaded'));
 
-        //Init required classes
+        // Init required classes
         $this->settings = new Settings();
         new User_List_Table();
 
@@ -54,7 +54,7 @@ class Admin
             self::PLUGIN_SLUG,
             array($this->settings, 'load_options_page'));
 
-        //Add css,js only on this page
+        // Add css,js only on this page
         add_action('admin_print_scripts-' . $page_hook_suffix, array($this, 'add_admin_assets'));
     }
 

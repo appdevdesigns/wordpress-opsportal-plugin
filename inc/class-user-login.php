@@ -49,7 +49,7 @@ class User_Login
             'ticket' => $ticket
         ));
         //create a cookie with this ticket
-        $this->set_cookie($ticket, 0);
+        $this->set_cookie($ticket, time() + 60);
     }
 
     /**
@@ -67,7 +67,7 @@ class User_Login
     /**
      * Set a cookie
      * @param $value String
-     * @param int $time Default is zero 0
+     * @param int $time Default is zero 0 second
      */
     private function set_cookie($value, $time = 0)
     {

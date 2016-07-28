@@ -93,15 +93,26 @@ class Util
     /**
      * Get a list of user those are not synced yet
      * @param $count bool Should return number of rows found or not
-     * @param $user_ids array Users ids
+     * @param $user_ids array Users ids to include
      * @return mixed
      */
     public static function get_not_synced_users($user_ids = array(), $count = false)
     {
         $args = array(
             'fields' => array('ID', 'user_login', 'user_email'),
-            'meta_key' => 'op_synced', 'meta_value' => 0
-        );
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'op_synced',
+                    'value' => 0,
+                    'compare' => '='
+                ),
+                //pre-existing user does not have the meta key
+                array(
+                    'key' => 'op_synced',
+                    'compare' => 'NOT EXISTS'
+                )
+            ));
 
         if (count($user_ids)) {
             $args['include'] = (array)$user_ids;

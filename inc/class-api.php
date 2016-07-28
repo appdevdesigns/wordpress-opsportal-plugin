@@ -220,6 +220,26 @@ class API
     }
 
     /**
+     * Logout a user
+     *
+     * @POST
+     * @param $data array
+     * @return mixed
+     */
+    public function logout($data)
+    {
+        $headers = $this->getRequiredHeaders();
+
+        return $this->http->curl(
+            $this->baseURL . 'appdev-core/logoutGUID',
+            $data,
+            $headers,
+            true //is POST request
+        );
+
+    }
+
+    /**
      * Check server response and store it into persistent storage
      * @param $name  string Transient name
      * @param $response array Server response

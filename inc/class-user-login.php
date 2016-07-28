@@ -29,6 +29,8 @@ class User_Login
         //https://codex.wordpress.org/Plugin_API/Action_Reference/wp_logout
         add_action('wp_logout', array($this, 'do_after_logout'));
 
+        add_action('clear_auth_cookie', array($this, 'do_when_clear_auth_cookie'));
+
         $this->api = new API();
     }
 
@@ -62,6 +64,22 @@ class User_Login
             //delete cookie
             $this->set_cookie(null, time() - 3600);
         }
+
+    }
+
+    /**
+     * Hooks before wp delete auth cookies
+     */
+    public function do_when_clear_auth_cookie()
+    {
+        if (false === is_user_logged_in()) return;
+
+        $user = wp_get_current_user();
+
+        //Calling Ops Portal to logout this user
+        $this->api->logout(
+            array('guid' => $this->get_user_guid($user)
+            ));
     }
 
     /**

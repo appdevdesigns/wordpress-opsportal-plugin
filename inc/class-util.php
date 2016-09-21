@@ -6,7 +6,7 @@ namespace AppDev\Plugins\WP_Ops_Portal;
  */
 class Util
 {
-    function __construct()
+    public function __construct()
     {
         // do something
     }
@@ -18,6 +18,7 @@ class Util
      */
     public static function load_view($file, $vars = array())
     {
+
         $file_path = plugin_dir_path(WPOP_BASE_FILE) . 'views/' . sanitize_file_name($file) . '.php';
         if (is_readable($file_path)) {
             //WordPress discourage 'extract' function

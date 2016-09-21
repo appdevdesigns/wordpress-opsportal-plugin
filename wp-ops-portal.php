@@ -5,7 +5,7 @@ namespace AppDev\Plugins\WP_Ops_Portal;
 Plugin Name: WP Ops Portal
 Plugin URI: https://github.com/appdevdesigns/wordpress-opsportal-plugin
 Description: Ops Portal for WordPress
-Version: 1.0.0
+Version: 1.0.1
 Author: appdevdesigns
 Author URI: https://github.com/appdevdesigns
 License: ?
@@ -18,7 +18,7 @@ Domain Path: /languages
 if (!defined('ABSPATH')) die('No Direct Access!');
 
 //Update plugin version whenever a new version is out
-define('WPOP_PLUGIN_VER', '1.0.0');
+define('WPOP_PLUGIN_VER', '1.0.1');
 define('WPOP_BASE_FILE', __FILE__);
 define('WPOP_OPTION_NAME', 'ops_portal_options');
 

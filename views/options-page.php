@@ -40,7 +40,7 @@
                         <td><select name="ops_portal_options[defaultRole]">
                                 <option disabled value=""><?php _e('Select a Role', 'ops-portal'); ?></option>
                                 <?php
-                                foreach ($roles as $role) {
+                                foreach ((array)$roles as $role) {
                                     echo '<option value="' . $role['id'] . '"' . selected($db['defaultRole'], $role['id'], false) . '>' . self::get_localized_label($role['translations']) . '</option>';
                                 }
                                 ?>
@@ -55,7 +55,7 @@
                         <td>
                             <fieldset>
                                 <?php
-                                foreach ($scopes as $scope) {
+                                foreach ((array)$scopes as $scope) {
                                     echo '<label><input type="checkbox" name="ops_portal_options[defaultScopes][]" ';
                                     echo (in_array($scope['id'], $db['defaultScopes'])) ? ' checked ' : '';
                                     echo ' value="' . $scope['id'] . '">';

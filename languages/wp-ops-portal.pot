@@ -2,10 +2,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ops Portal\n"
-"POT-Creation-Date: 2016-06-28 17:17+0530\n"
+"POT-Creation-Date: 2016-09-21 10:17+0530\n"
 "PO-Revision-Date: 2016-06-07 11:17+0530\n"
 "Last-Translator: \n"
-"Language-Team: ITHands\n"
+"Language-Team: appdevdesigns\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,68 +21,68 @@ msgstr ""
 "X-Poedit-SearchPath-1: inc\n"
 "X-Poedit-SearchPathExcluded-0: logs\n"
 
-#: inc/class-admin.php:66
+#: inc/class-admin.php:75
 msgid "Settings"
 msgstr ""
 
-#: inc/class-http.php:30
+#: inc/class-http.php:39
 msgid "CURL is not installed, Ops Portal Plugin requires CURL pre-installed"
 msgstr ""
 
-#: inc/class-settings.php:121
+#: inc/class-settings.php:124
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/class-settings.php:159
+#: inc/class-settings.php:163
 msgid "Base URL was not a valid URL."
 msgstr ""
 
-#: inc/class-settings.php:165
+#: inc/class-settings.php:170
+msgid "Auth Key is required."
+msgstr ""
+
+#: inc/class-settings.php:176
 msgid "At-least one scope should be selected."
 msgstr ""
 
-#: inc/class-settings.php:169
+#: inc/class-settings.php:180
 msgid "A role should be selected."
 msgstr ""
 
-#: inc/class-settings.php:216
-msgid "Default"
+#: inc/class-settings.php:186
+msgid "Cache has been cleared"
 msgstr ""
 
-#: inc/class-settings.php:255
-msgid "Failed to connect to Ops Portal. Server response code"
-msgstr ""
-
-#: inc/class-user-list-table.php:48
+#: inc/class-user-list-table.php:49
 msgid "Yes"
 msgstr ""
 
-#: inc/class-user-list-table.php:48
+#: inc/class-user-list-table.php:49
 msgid "No"
 msgstr ""
 
-#: inc/class-user-list-table.php:51
+#: inc/class-user-list-table.php:52 inc/class-user-list-table.php:55
 msgid "NA"
 msgstr ""
 
-#: inc/class-user-list-table.php:71
+#: inc/class-user-list-table.php:77
 msgid "Sync to Ops Portal"
 msgstr ""
 
-#: inc/class-user-list-table.php:105
+#: inc/class-user-list-table.php:111
 msgid "Bulk User Sync Finished !"
 msgstr ""
 
-#: inc/class-util.php:29
+#: inc/class-util.php:30
 #, php-format
 msgid "Error locating view file %s for inclusion"
 msgstr ""
 
-#: inc/class-util.php:83
+#: inc/class-util.php:84
 msgid "File is empty"
 msgstr ""
 
-#: inc/class-util.php:89
+#: inc/class-util.php:90
 msgid "not readable or not found"
 msgstr ""
 
@@ -94,58 +94,91 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: views/options-page.php:6
-msgid "Interface"
-msgstr ""
-
-#: views/options-page.php:8
+#: views/options-page.php:7
 msgid "Troubleshoot"
 msgstr ""
 
-#: views/options-page.php:19
+#: views/options-page.php:18
 msgid "Base URL"
 msgstr ""
 
 #: views/options-page.php:23
-msgid "Example"
+msgid "Should be a valid URL"
 msgstr ""
 
-#: views/options-page.php:28
+#: views/options-page.php:27
+msgid "Auth Key"
+msgstr ""
+
+#: views/options-page.php:35
+msgid "Paste your secret key here"
+msgstr ""
+
+#: views/options-page.php:39
 msgid "Default Role"
 msgstr ""
 
-#: views/options-page.php:30
+#: views/options-page.php:41
 msgid "Select a Role"
 msgstr ""
 
-#: views/options-page.php:40
+#: views/options-page.php:49
+msgid "Unable to fetch roles"
+msgstr ""
+
+#: views/options-page.php:54
 msgid "Default Scopes"
 msgstr ""
 
-#: views/options-page.php:59
-msgid "Default theme"
+#: views/options-page.php:67
+msgid "Unable to fetch scopes"
 msgstr ""
 
-#: views/options-page.php:79
-msgid "Debug CURL"
+#: views/options-page.php:72 views/options-page.php:75
+msgid "Default Theme"
 msgstr ""
 
-#: views/options-page.php:81
-msgid "Log CURL calls"
+#: views/options-page.php:74
+msgid "Select a Theme"
 msgstr ""
 
 #: views/options-page.php:83
+msgid "Unable to fetch themes"
+msgstr ""
+
+#: views/options-page.php:92
+msgid "Debug CURL"
+msgstr ""
+
+#: views/options-page.php:94
+msgid "Log CURL calls"
+msgstr ""
+
+#: views/options-page.php:96
 msgid "This should only be used temporarily or during development"
 msgstr ""
 
-#: views/options-page.php:87
+#: views/options-page.php:100
 msgid "Last CURL response"
 msgstr ""
 
-#: views/options-page.php:93
+#: views/options-page.php:106
 msgid "Last CURL stderr log"
 msgstr ""
 
-#: views/options-page.php:99
+#: views/options-page.php:112
 msgid "Database options dump"
+msgstr ""
+
+#: views/options-page.php:120
+msgid "Save Changes"
+msgstr ""
+
+#: views/short-code.php:20
+msgid "Ops Portal plugin not configured properly"
+msgstr ""
+
+#: views/short-code.php:27
+msgid ""
+"You must be logged-in to WordPress in order to see Ops Portal interface"
 msgstr ""

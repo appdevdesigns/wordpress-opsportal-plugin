@@ -125,7 +125,7 @@ class Settings
         }
 
         //The data you want to pass on view
-        $view = array(
+        $data = array(
             'option_group' => self::WPOP_OPTION_GROUP,
             'db' => $this->get_safe_options(),
             'roles' => $this->get_roles_array(),
@@ -135,7 +135,7 @@ class Settings
             'curl_stderr' => Util::read_log_file('curl_stderr.log'),
         );
 
-        Util::load_view('options-page', $view);
+        Util::load_view('options-page', $data);
     }
 
     /**
@@ -192,8 +192,8 @@ class Settings
         }
 
         $out['debugCURL'] = isset($in['debugCURL']);
-        $out['defaultRole'] = intval($in['defaultRole']);
-        $out['defaultScopes'] = (array)$in['defaultScopes'];
+        $out['defaultRole'] = isset($in['defaultRole']) ? intval($in['defaultRole']) : '';
+        $out['defaultScopes'] = isset($in['defaultScopes']) ? (array)$in['defaultScopes'] : array();
         $out['defaultTheme'] = sanitize_text_field($in['defaultTheme']);
         return $out;
 

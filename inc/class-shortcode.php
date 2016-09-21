@@ -12,6 +12,7 @@ class Shortcode
     function __construct()
     {
         // Register our short-code
+        //@link https://codex.wordpress.org/Function_Reference/add_shortcode
         add_shortcode('ops_portal', array($this, 'process_shortcode'));
     }
 
@@ -30,7 +31,7 @@ class Shortcode
             'theme' => $theme,
             'base_url' => $db['baseURL'] //baseURL contains a slash '/' at end
         ));
-        
+
         return ob_get_clean();
     }
 }

@@ -5,8 +5,8 @@
 
 ### Prerequisite
 * php v5.3.0+ or v7.0.x
-* apache 2.4 with ```proxy_http``` module enabled
-* MySQL 5.6
+* apache v2.4 with ```proxy_http``` module enabled
+* MySQL v5.6
 * WordPress v4.0 or above
 * php [cURL Extension](http://php.net/manual/en/book.curl.php) to talk with APIs on Ops Portal
 * [Composer](https://getcomposer.org/download/) (If you want to use modern WordPress)
@@ -22,7 +22,7 @@
 * Download WordPress core and dependencies
 ```bash
 cd ~
-composer create-project roots/bedrock wordpress "1.6.*"
+composer create-project roots/bedrock wordpress "1.7.*"
 ```
 * Copy ```.env.example``` to ```.env``` and update environment variables
 ```bash
@@ -32,7 +32,7 @@ nano .env
 ```
 * Create a [virtual host](https://httpd.apache.org/docs/current/vhosts/) named ```wp-test.local``` that points to ```wordpress/web``` folder
 ```
-# Ubuntu, apache2.4
+# Ubuntu, apache v2.4
 # Example virtual host file
 # /etc/apache2/sites-available/wordpress.conf
 <VirtualHost *:80>
@@ -99,7 +99,7 @@ npm install git://github.com/appdevdesigns/opstool-wordpress-plugin#develop
 * Ops Portal should be running on the sub-domain like: ```opsportal.wp-test.local``` in order to share cookies with WordPress
 * Use [reverse proxy](http://stackoverflow.com/questions/8541182/apache-redirect-to-another-port) apache method to configure Ops Portal to run on subdomain
 ```
-   # Ubuntu, apache 2.4
+   # Ubuntu, apache v2.4
    # /etc/apache2/site-available/opsportal.conf
    <VirtualHost *:80>
      ProxyPreserveHost On

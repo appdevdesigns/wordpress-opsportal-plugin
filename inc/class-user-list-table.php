@@ -11,7 +11,7 @@ class User_List_Table
 {
 
 
-    function __construct()
+    public function __construct()
     {
         add_filter('manage_users_columns', array($this, 'add_new_columns'));
         add_action('manage_users_custom_column', array($this, 'show_column_value'), 10, 3);

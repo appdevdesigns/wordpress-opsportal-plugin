@@ -18,7 +18,7 @@
 
 ### Setup this project on localhost
 * **Install [WordPress](https://codex.wordpress.org/Installing_WordPress)** good old way
-* **Install [WordPress](https://github.com/roots/bedrock#installation)** modern way
+* **Install [WordPress](https://github.com/roots/bedrock#installation)** modern way, steps below
 * Download WordPress core and dependencies
 ```bash
 cd ~
@@ -75,7 +75,7 @@ git clone https://github.com/appdevdesigns/wordpress-opsportal-plugin.git
 cd wordpress-opsportal-plugin
 git checkout dev
 ```
-* Set write permissions on ```logs``` folder if you want to debug CURL
+* Set write permissions on ```logs``` folder, if you want to debug CURL calls
 ```bash
 sudo chmod -R 755 logs
 sudo chown -R www-data:www-data logs
@@ -89,14 +89,14 @@ sudo chown -R www-data:www-data logs
 cd sails
 npm install git://github.com/appdevdesigns/opstool-wordpress-plugin#develop
 ```
-* OpsPortal may need some additional configurations for example cors, csrf etc.
-* OpsPortal also requires to have authKeys setup in ```config/appdev.js```
+* OpsPortal (sails) may need some additional configurations, for example cors, csrf etc.
+* OpsPortal (sails) also requires to have authKeys setup in ```config/appdev.js```
 ```
 'authKeys': {
   'admin': '<YOUR SECRET KEY HERE>'
  }
 ```
-* Ops Portal should be running on the sub-domain like: ```opsportal.wp-test.local``` in order to share cookies with WordPress
+* Ops Portal (sails) should be running on the sub-domain like: ```opsportal.wp-test.local``` in order to share cookies with WordPress
 * Use [reverse proxy](http://stackoverflow.com/questions/8541182/apache-redirect-to-another-port) apache method to configure Ops Portal to run on subdomain
 ```
    # Ubuntu, apache v2.4

@@ -6,6 +6,7 @@ namespace AppDev\Plugins\WP_Ops_Portal;
  *
  * This class is responsible for modification in WordPress inbuilt user list table 'wp-admin/users.php'
  * @package AppDev\Plugins\WP_Ops_Portal
+ * todo Leverage new WordPress 4.7 API, https://make.wordpress.org/core/2016/10/04/custom-bulk-actions/
  */
 class User_List_Table
 {

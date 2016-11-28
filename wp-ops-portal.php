@@ -1,19 +1,19 @@
 <?php
 namespace AppDev\Plugins\WP_Ops_Portal;
 
-/*
-Plugin Name: WP Ops Portal
-Plugin URI: https://github.com/appdevdesigns/wordpress-opsportal-plugin
-Description: Ops Portal for WordPress
-Version: 1.0.1
-Author: appdevdesigns
-Author URI: https://github.com/appdevdesigns
-License: ?
-License URI: https://opensource.org/licenses/
-Text Domain: ops-portal
-Domain Path: /languages
-*/
-?><?php
+    /**
+     * Plugin Name: WP Ops Portal
+     * Plugin URI: https://github.com/appdevdesigns/wordpress-opsportal-plugin
+     * Description: Ops Portal for WordPress
+     * Version: 1.0.1
+     * Author: appdevdesigns
+     * Author URI: https://github.com/appdevdesigns
+     * License: GPL-3.0
+     * License URI: https://opensource.org/licenses/GPL-3.0
+     * Text Domain: ops-portal
+     * Domain Path: /languages
+     */
+
 //No direct access
 if (!defined('ABSPATH')) die('No Direct Access!');
 
